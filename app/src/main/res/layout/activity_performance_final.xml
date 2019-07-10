@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".PerformanceFinalActivity"
+    android:id="@+id/scoreTable"
+    android:gravity="center"
+    android:divider="#000000">
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#39f142"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:text="Game"
+            android:textSize="25sp"
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:text="Correct"
+            android:textSize="25sp"
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:text="Incorrect"
+            android:textSize="25sp"
+            />
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="Put the balls\nin basket"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="5"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="8"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="Put the balls\nin basket"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="3"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="Put the shapes\nat correct\nposition"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="6"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="Put the balls\nin basket"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="4"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="6"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="Put the shapes\nat correct\nposition"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="5"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="8"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="Put the balls\nin basket"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:text="0"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+
+    </TableRow>
+
+
+
+
+    <!--<TableRow android:layout_height="50dp"-->
+        <!--android:background="@drawable/button_style">-->
+        <!--<TextView-->
+            <!--android:text="Name"-->
+            <!--android:textSize="30sp"/>-->
+
+        <!--<TextView-->
+            <!--android:text="Name"-->
+            <!--android:textSize="30sp"/>-->
+
+    <!--</TableRow>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:text="Name"-->
+            <!--android:textSize="30sp"/>-->
+
+    <!--</TableRow>-->
+
+</TableLayout>

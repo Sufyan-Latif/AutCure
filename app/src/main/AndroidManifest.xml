@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sufyanlatif.myapplication">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- <activity android:name=".MainActivity"/> -->
+
+        <activity android:name=".AnimationsActivity" />
+        <activity android:name=".teachersignup" />
+        <activity android:name=".signupparent" />
+        <activity android:name=".authenticationact" />
+        <activity android:name=".teacherhome" />
+        <activity android:name=".parenthome" />
+        <activity android:name=".ChildHomeActivity" />
+        <activity android:name=".childsignup" />
+        <activity android:name=".loginact" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- <activity android:name=".MainActivity" /> -->
+        <activity
+            android:name=".GameDragActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".GameMatchShapeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ListNamesActivity" />
+        <activity android:name=".PerformanceFinalActivity" />
+        <activity android:name=".TempActivity" />
+        <activity android:name=".TeacherCommunicationActivity" />
+        <activity android:name=".AnimalGameActivity" />
+        <activity android:name=".VegetableGameActivity"></activity>
+    </application>
+
+</manifest>

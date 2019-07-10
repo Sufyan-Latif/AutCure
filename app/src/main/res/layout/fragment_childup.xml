@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="450dp"
+    android:padding="10dp"
+    tools:context=".childup">
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="5dp"-->
+        <!--app:errorEnabled="true"-->
+        <!--app:counterEnabled="true"-->
+        <!--app:counterMaxLength="15"-->
+        <!--&gt;-->
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:background="@drawable/edit_text_style"-->
+            <!--android:drawableLeft="@drawable/ic_user"-->
+            <!--android:drawablePadding="25dp"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:hint="First Name"-->
+            <!--/>-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:hint="First"-->
+        <!--android:background="@drawable/edit_text_style"-->
+        <!--android:drawableLeft="@drawable/ic_user"-->
+        <!--android:paddingLeft="15dp"-->
+        <!--android:drawablePadding="15dp"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:paddingRight="10dp"-->
+        <!--/>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/editchildfirst"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="20dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@drawable/buttondesign"-->
+        <!--android:drawableStart="@drawable/ic_user"-->
+        <!--android:drawablePadding="25dp"-->
+        <!--android:hint="First Name"-->
+        <!--android:inputType="textPersonName"-->
+        <!--/>-->
+
+    <EditText
+        android:id="@+id/editchildfirst"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawablePadding="25dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableStart="@drawable/ic_user"
+        android:hint="First Name"
+        android:inputType="textCapWords"
+        />
+    <EditText
+        android:id="@+id/editchildlast"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawablePadding="25dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableStart="@drawable/ic_user"
+        android:hint="Last Name"
+        android:inputType="textCapWords"
+        />
+    <EditText
+        android:id="@+id/editchildusername"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawablePadding="25dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableStart="@drawable/ic_user"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/editchildpassword"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawablePadding="25dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableStart="@drawable/ic_lock"
+        android:hint="Password"
+        android:inputType="textPassword"
+        />
+    <EditText
+        android:id="@+id/editchconpassword"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawablePadding="25dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableStart="@drawable/ic_lock"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        >
+        <Button
+            android:id="@+id/childbtnnext"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/button_style"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/childbtnback1"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_style"
+            android:text="Back"
+            android:layout_alignParentEnd="true"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

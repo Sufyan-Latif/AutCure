@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#262a2e27"
+    android:padding="10dp"
+    tools:context=".GameDragActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreLayout">
+
+        <TextView
+            android:id="@+id/correctBalls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correct : "
+            android:textSize="20sp"
+            android:textColor="#0327f5"
+            />
+        <TextView
+            android:id="@+id/incorrectBalls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Incorrect :   "
+            android:layout_alignParentRight="true"
+            android:textSize="20sp"
+            android:textColor="#0327f5"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvPutTheBall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/scoreLayout"
+        android:text="Put the balls in the basket"
+        android:textColor="#af3d3d"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <ImageView
+        android:id="@+id/redBall"
+        android:layout_below="@id/tvPutTheBall"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/red_ball" />
+
+    <ImageView
+        android:id="@+id/blueBall"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/blue_ball" />
+
+    <ImageView
+        android:id="@+id/greenBall"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/green_ball" />
+
+    <ImageView
+        android:id="@+id/blueBasket"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/tvPutTheBall"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/basket" />
+
+    <ImageView
+        android:id="@+id/redBasket"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/red_basket" />
+
+    <ImageView
+        android:id="@+id/greenBasket"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/green_basket" />
+
+</RelativeLayout>

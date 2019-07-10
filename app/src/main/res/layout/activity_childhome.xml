@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:padding="15dp"
+    tools:context=".ChildHomeActivity">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="204dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/boy" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView10"
+        android:layout_centerHorizontal="true"
+        android:text="Child"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="35sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnPlayGames"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/ic_game"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="Play games"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/btnViewTasks"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btnPlayGames"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/viewtask"
+        android:background="@drawable/button"
+        android:text="View Tasks"
+        />
+    <Button
+        android:id="@+id/viewAnimations"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btnViewTasks"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_performtask"
+        android:background="@drawable/button"
+        android:text="View Animations"
+        />
+
+</RelativeLayout>

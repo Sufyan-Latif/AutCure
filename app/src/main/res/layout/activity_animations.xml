@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="@drawable/back"
+    tools:context=".AnimationsActivity">
+
+    <ViewFlipper
+        android:id="@+id/animations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="65dp">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/animationTie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ti"
+            android:layout_marginBottom="65dp"
+            />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/animationShoes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/shoes"
+            android:layout_marginBottom="65dp"
+            />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/animationShirt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/shrt"
+            android:background="@drawable/back"
+            android:layout_marginBottom="65dp"
+            />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/animationRound"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/round"
+            android:layout_marginBottom="65dp"
+            />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/animationSocks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/socks"
+            android:layout_marginBottom="65dp"
+            />
+    </ViewFlipper>
+
+    <Button
+        android:id="@+id/prevAnimation"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="Previous"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:background="@drawable/button_style"/>
+
+    <Button
+        android:id="@+id/nextAnimation"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="Next"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_style"/>
+</RelativeLayout>

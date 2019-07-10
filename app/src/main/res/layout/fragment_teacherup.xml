@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teacherup">
+
+    <EditText
+        android:id="@+id/edittecfirst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttondesign"
+        android:drawableLeft="@drawable/ic_user"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/editteclast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttondesign"
+        android:drawableLeft="@drawable/ic_user"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/edittechusern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttondesign"
+        android:drawableLeft="@drawable/ic_user"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edittecpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittechusern"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttondesign"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_lock"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/edittecconpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittecpass"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttondesign"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_lock"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btntecnext"
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:background="@drawable/empty"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btntecback1"
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:textAllCaps="false"
+            android:background="@drawable/empty"
+            android:text="Back"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
+</LinearLayout>

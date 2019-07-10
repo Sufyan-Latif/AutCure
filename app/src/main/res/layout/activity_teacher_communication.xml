@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TeacherCommunicationActivity"
+    android:background="@drawable/back"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_couple"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#7aabf4"
+        android:focusable="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name: Muhammad Latif"
+        android:textColor="#000"
+        android:textSize="25sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="From: Shahab Pura Sialkot"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnTeacherDialNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dial Number"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button"
+            />
+        <Button
+            android:id="@+id/btnTeacherSendMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Send Mail"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
