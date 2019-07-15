@@ -156,7 +156,7 @@ public class Performance extends AsyncTask<String, String, String> {
 
                     Gson gson = new Gson();
                     String json= gson.toJson(recordMap);
-                    intentRecord.putExtra("message", "final");
+                    intentRecord.putExtra("callfrom", "Performance.java");
                     intentRecord.putExtra("map", json);
                     context.startActivity(intentRecord);
                 }

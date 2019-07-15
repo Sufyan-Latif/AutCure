@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.models.Teacher;
+import com.example.sufyanlatif.myapplication.webservices.Communication;
 import com.example.sufyanlatif.myapplication.webservices.Performance;
 import com.example.sufyanlatif.myapplication.webservices.UserRecord;
 
@@ -91,8 +92,10 @@ public class teacherhome extends AppCompatActivity {
         communication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(teacherhome.this, TeacherCommunicationActivity.class);
-                startActivity(intent);
+                Communication communication= new Communication(teacherhome.this);
+                communication.execute("teacherhome", teacher.getId(), "children");
+//                Intent intent= new Intent(teacherhome.this, TeacherCommunicationActivity.class);
+//                startActivity(intent);
             }
         });
 //        communication.setOnClickListener(new View.OnClickListener() {

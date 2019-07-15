@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.models.Parent;
+import com.example.sufyanlatif.myapplication.webservices.Communication;
 import com.example.sufyanlatif.myapplication.webservices.Performance;
 import com.example.sufyanlatif.myapplication.webservices.RetrievePerformance;
 import com.example.sufyanlatif.myapplication.webservices.UserRecord;
@@ -79,6 +80,8 @@ public class parenthome extends AppCompatActivity {
         parentCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Communication communication= new Communication(parenthome.this);
+                communication.execute("parenthome", parent.getId(), "children");
 //                Intent intent= new Intent(parenthome.this, PerformanceFinalActivity.class);
 //                startActivity(intent);
             }

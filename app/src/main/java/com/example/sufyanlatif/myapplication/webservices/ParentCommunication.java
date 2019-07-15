@@ -116,13 +116,10 @@ public class ParentCommunication extends AsyncTask<String, String, String> {
                         record.put("id", ids);
                         record.put("first_name", firstNames);
                         record.put("last_name", lastNames);
-                        Log.d("unique", String.valueOf(ids));
                     }
 
                     intent.putExtra("message", "MultipleChildren");
                     intent.putExtra("map", record);
-
-                    Log.d("map", "\n"+ record);
                 }
                 else if(jo.getString("message").equals("SingleData")){
                     HashMap<String, String> sigleRecord= new HashMap<String, String>();

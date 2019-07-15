@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sufyanlatif.myapplication.webservices.Communication;
 import com.example.sufyanlatif.myapplication.webservices.Performance;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,6 +43,7 @@ public class ListNamesActivity extends AppCompatActivity {
 //        }
 
         Intent intent = getIntent();
+        String callFrom= intent.getStringExtra("callfrom");
 //        String message = intent.getStringExtra("message");
 
         Gson gson= new Gson();
@@ -50,30 +52,74 @@ public class ListNamesActivity extends AppCompatActivity {
         Type type = new TypeToken<LinkedHashMap<String, ArrayList<String>>>() {}.getType();
         LinkedHashMap<String, ArrayList<String>> recordMap = gson.fromJson(json, type);
 
-        final ArrayList<String> ids= recordMap.get("id");;
+        final ArrayList<String> ids= recordMap.get("id");
         ArrayList<String> firstName= recordMap.get("first_name");
         ArrayList<String> lastName= recordMap.get("last_name");
 
         ArrayList<String> completeName = new ArrayList<String>();
-        for (int i = 0; i < ids.size(); i++) {
-            completeName.add(firstName.get(i) + " " + lastName.get(i));
+
+        if (callFrom.equals("Communication.java teacher")){
+            tvList.setText("Select a parent to communicate from the list !!!");
+            for (int i = 0; i < ids.size(); i++) {
+                completeName.add(firstName.get(i) + " " + lastName.get(i)+ "'s Parents");
+            }
+
+            if (isInternetConnected()) {
+                namesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Communication communication= new Communication(ListNamesActivity.this);
+                        communication.execute("listnames", ids.get(position), "parents");
+                    }
+                });
+            } else
+                Toast.makeText(ListNamesActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+        }
+        else if (callFrom.equals("Communication.java parent")){
+            tvList.setText("Select a teacher to communicate from the list !!!");
+            for (int i = 0; i < ids.size(); i++) {
+                completeName.add(firstName.get(i) + " " + lastName.get(i)+ "'s Teachers");
+            }
+
+            if (isInternetConnected()) {
+                namesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Communication communication= new Communication(ListNamesActivity.this);
+                        communication.execute("listnames", ids.get(position), "teachers");
+                    }
+                });
+            } else
+                Toast.makeText(ListNamesActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+            tvList.setText("Select a child from the list !!!");
+            for (int i = 0; i < ids.size(); i++) {
+                completeName.add(firstName.get(i) + " " + lastName.get(i));
+            }
+
+            if (isInternetConnected()) {
+                namesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Performance performance = new Performance(ListNamesActivity.this);
+                        performance.execute("children", ids.get(position));
+                    }
+                });
+            }
+            else
+                Toast.makeText(ListNamesActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(ListNamesActivity.this, R.layout.listview_text, completeName);
         namesListView.setAdapter(adapter);
 
-        namesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (isInternetConnected()) {
-                        onPause();
-                        Performance performance = new Performance(ListNamesActivity.this);
-                        performance.execute("children", ids.get(position));
-                    } else
-                        Toast.makeText(ListNamesActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
-                }
-            });
-            tvList.setText("Select a child from the list !!!");
+
+
 
 
 
