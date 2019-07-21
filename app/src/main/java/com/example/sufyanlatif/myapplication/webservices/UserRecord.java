@@ -1,5 +1,6 @@
 package com.example.sufyanlatif.myapplication.webservices;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -28,9 +29,12 @@ import java.net.URLEncoder;
 public class UserRecord extends AsyncTask<String, String, String> {
 
     Context context;
+    ProgressDialog progressDialog;
     public UserRecord(Context ctx)
     {
         context = ctx;
+        progressDialog= new ProgressDialog(context);
+        progressDialog.setMessage("Loading... Please wait");
     }
 
     @Override
@@ -88,6 +92,7 @@ public class UserRecord extends AsyncTask<String, String, String> {
     }
     @Override
     protected void onPreExecute() {
+        progressDialog.show();
         super.onPreExecute();
     }
     @Override
@@ -150,5 +155,6 @@ public class UserRecord extends AsyncTask<String, String, String> {
             e.printStackTrace();
             Toast.makeText(context, "unknown error occured", Toast.LENGTH_SHORT).show();
         }
+        progressDialog.dismiss();
     }
 }

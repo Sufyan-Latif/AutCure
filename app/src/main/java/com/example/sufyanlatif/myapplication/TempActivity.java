@@ -105,6 +105,7 @@ class MyAdapter extends ArrayAdapter{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater= (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        LayoutInflater.from(parent.getContext()).inflate(R.layout.score_listview_row, parent, false);
         View row= inflater.inflate(R.layout.score_listview_row, parent, false);
 
         TextView tvGameId= row.findViewById(R.id.tvgameId);
@@ -116,6 +117,5 @@ class MyAdapter extends ArrayAdapter{
         incorrect.setText(incorrectList.get(position));
 
         return row;
-//        return super.getView(position, convertView, parent);
     }
 }

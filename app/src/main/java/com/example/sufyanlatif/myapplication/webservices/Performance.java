@@ -41,6 +41,8 @@ public class Performance extends AsyncTask<String, String, String> {
 
     public Performance(Context ctx) {
         context = ctx;
+        progressDialog= new ProgressDialog(context);
+        progressDialog.setMessage("Loading... Please wait");
     }
 
     @Override
@@ -90,9 +92,7 @@ public class Performance extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPreExecute() {
-//        progressDialog= new ProgressDialog(context);
-//        progressDialog.setMessage("Fetching Score...");
-//        progressDialog.show();
+        progressDialog.show();
         super.onPreExecute();
     }
 
@@ -223,6 +223,6 @@ public class Performance extends AsyncTask<String, String, String> {
 
 //        context.finish();
 //            if (progressDialog.isShowing())
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
     }
 }
