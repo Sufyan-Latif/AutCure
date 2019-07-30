@@ -7,10 +7,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.sufyanlatif.myapplication.ListNamesActivity;
-import com.example.sufyanlatif.myapplication.Score;
-import com.example.sufyanlatif.myapplication.TeacherCommunicationActivity;
-import com.example.sufyanlatif.myapplication.TempActivity;
+import com.example.sufyanlatif.myapplication.activities.ListNamesActivity;
+import com.example.sufyanlatif.myapplication.activities.TeacherCommunicationActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -31,7 +29,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class Communication extends AsyncTask<String, String, String>{
 
@@ -148,7 +145,7 @@ public class Communication extends AsyncTask<String, String, String>{
 //                }
 //                context.startActivity(performanceIntent);
             }
-            if (activityName.equals("parenthome")){
+            if (activityName.equals("ParentHomeActivity")){
                 if (jsonArray.length()==1){
                     JSONObject jo = jsonArray.getJSONObject(0);
                     String teacher_id= jo.getString("teacher_id");
@@ -186,7 +183,7 @@ public class Communication extends AsyncTask<String, String, String>{
                     context.startActivity(intentRecord);
                 }
             }
-            else if (activityName.equals("teacherhome")){
+            else if (activityName.equals("TeacherHomeActivity")){
                 if (jsonArray.length()==1){
                     JSONObject jo = jsonArray.getJSONObject(0);
                     String parent_id= jo.getString("parent_id");

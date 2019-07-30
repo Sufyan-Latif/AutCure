@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     android:background="@drawable/back"
-    tools:context=".AnimationsActivity">
+    tools:context=".activities.AnimationsActivity">
 
     <ViewFlipper
         android:id="@+id/animations"

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ParentSignupOneFragment">
+
+    <EditText
+        android:id="@+id/editparentfirst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttondesign"
+        android:drawableStart="@drawable/ic_user"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/editparentlast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttondesign"
+        android:drawableStart="@drawable/ic_user"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/editparentusername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttondesign"
+        android:drawableStart="@drawable/ic_user"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editparentpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttondesign"
+        android:padding="20dp"
+        android:drawableStart="@drawable/ic_lock"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/editconpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttondesign"
+        android:padding="20dp"
+        android:drawableStart="@drawable/ic_lock"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/parenttbtnup"
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:background="@drawable/empty"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/parentbtnback"
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:textAllCaps="false"
+            android:background="@drawable/empty"
+            android:text="@string/back"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

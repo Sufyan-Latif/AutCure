@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.sufyanlatif.myapplication.ListNamesActivity;
-import com.example.sufyanlatif.myapplication.ProgressDialogStatic;
+import com.example.sufyanlatif.myapplication.activities.ListNamesActivity;
+//import com.example.sufyanlatif.myapplication.ProgressDialogStatic;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +32,7 @@ public class RetrievePerformance extends AsyncTask<String, String, String> {
 
     Context context;
     ProgressDialog progressDialog;
-    ProgressDialogStatic progressDialogStatic= new ProgressDialogStatic(context);
+//    ProgressDialogStatic progressDialogStatic= new ProgressDialogStatic(context);
 
     public RetrievePerformance(Context ctx) {
         context = ctx;
@@ -88,8 +88,8 @@ public class RetrievePerformance extends AsyncTask<String, String, String> {
 //        progressDialog.show();
 
 
-        progressDialogStatic.message("Loading... Please wait!!!");
-        progressDialogStatic.show();
+//        progressDialogStatic.message("Loading... Please wait!!!");
+//        progressDialogStatic.show();
         super.onPreExecute();
     }
 
@@ -141,7 +141,7 @@ public class RetrievePerformance extends AsyncTask<String, String, String> {
                     Log.d("map", "\n"+ sigleRecord);
                 }
             }
-            progressDialogStatic.dismiss();
+//            progressDialogStatic.dismiss();
             context.startActivity(intent);
 
 //            JSONObject jo = jsonArray.getJSONObject(0);

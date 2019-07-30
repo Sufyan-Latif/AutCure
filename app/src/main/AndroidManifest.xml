@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_my_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -17,16 +17,16 @@
 
         <!-- <activity android:name=".MainActivity"/> -->
 
-        <activity android:name=".AnimationsActivity" />
-        <activity android:name=".teachersignup" />
-        <activity android:name=".signupparent" />
-        <activity android:name=".authenticationact" />
-        <activity android:name=".teacherhome" />
-        <activity android:name=".parenthome" />
-        <activity android:name=".ChildHomeActivity" />
-        <activity android:name=".childsignup" />
-        <activity android:name=".loginact" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".activities.AnimationsActivity" />
+        <activity android:name=".activities.TeacherSignupActivity" />
+        <activity android:name=".activities.ParentSignupActivity" />
+        <activity android:name=".activities.AuthenticationActivity" />
+        <activity android:name=".activities.TeacherHomeActivity" />
+        <activity android:name=".activities.ParentHomeActivity" />
+        <activity android:name=".activities.ChildHomeActivity" />
+        <activity android:name=".activities.ChildSignupActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +35,7 @@
         </activity>
         <!-- <activity android:name=".MainActivity" /> -->
         <activity
-            android:name=".GameDragActivity"
+            android:name=".activities.GameDragActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- <intent-filter> -->
@@ -46,14 +46,14 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".GameMatchShapeActivity"
+            android:name=".activities.GameMatchShapeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListNamesActivity" />
+        <activity android:name=".activities.ListNamesActivity" />
         <activity android:name=".PerformanceFinalActivity" />
         <activity android:name=".TempActivity" />
-        <activity android:name=".TeacherCommunicationActivity" />
-        <activity android:name=".AnimalGameActivity" />
-        <activity android:name=".VegetableGameActivity"></activity>
+        <activity android:name=".activities.TeacherCommunicationActivity" />
+        <activity android:name=".activities.AnimalGameActivity" />
+        <activity android:name=".activities.VegetableGameActivity"></activity>
     </application>
 
 </manifest>

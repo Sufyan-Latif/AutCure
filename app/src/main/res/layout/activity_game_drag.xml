@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#262a2e27"
     android:padding="10dp"
-    tools:context=".GameDragActivity">
+    tools:context=".activities.GameDragActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
             android:id="@+id/correctBalls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correct : "
+            android:text="@string/correct_0"
             android:textSize="20sp"
             android:textColor="#0327f5"
             />
@@ -24,9 +24,9 @@
             android:id="@+id/incorrectBalls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Incorrect :   "
-            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:text="@string/incorrect_0"
+            android:layout_alignParentEnd="true"
             android:textSize="20sp"
             android:textColor="#0327f5"
             />
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_below="@id/scoreLayout"
-        android:text="Put the balls in the basket"
+        android:text="@string/put_the_balls_in_the_basket"
         android:textColor="#af3d3d"
         android:textSize="30sp"
         android:textStyle="italic" />
@@ -69,14 +69,14 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/tvPutTheBall"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/basket" />
 
     <ImageView
         android:id="@+id/redBasket"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/red_basket" />
 
@@ -84,7 +84,7 @@
         android:id="@+id/greenBasket"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:src="@drawable/green_basket" />
 

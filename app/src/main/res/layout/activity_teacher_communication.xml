@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeacherCommunicationActivity"
+    tools:context=".activities.TeacherCommunicationActivity"
     android:background="@drawable/back"
     android:orientation="vertical"
     android:padding="10dp">
@@ -23,7 +23,7 @@
         android:id="@+id/tvname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name: Muhammad Latif"
+        android:text="@string/name"
         android:textColor="#000"
         android:textSize="25sp"
         />
@@ -31,7 +31,7 @@
         android:id="@+id/tvaddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="From: Shahab Pura Sialkot"
+        android:text="@string/from"
         android:textColor="#000"
         android:textSize="25sp"
         android:layout_marginTop="10dp"
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Dial Number"
+            android:text="@string/dial_number"
             android:textSize="20sp"
             android:layout_margin="5dp"
             android:background="@drawable/button"
@@ -58,12 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="Send Mail"
+            android:text="@string/send_mail"
             android:textSize="20sp"
             android:background="@drawable/button"
             />
 
     </LinearLayout>
-
 
 </LinearLayout>

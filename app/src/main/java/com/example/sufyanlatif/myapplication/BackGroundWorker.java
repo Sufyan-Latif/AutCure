@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.example.sufyanlatif.myapplication.activities.ChildHomeActivity;
+import com.example.sufyanlatif.myapplication.activities.ParentHomeActivity;
+import com.example.sufyanlatif.myapplication.activities.TeacherHomeActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,7 +102,7 @@ public class BackGroundWorker extends AsyncTask<String, String, String> {
 
             if (type.equals("parents"))
             {
-                Intent intent = new Intent(context, parenthome.class);
+                Intent intent = new Intent(context, ParentHomeActivity.class);
                 context.startActivity(intent);
             }
             else if (type.equals("students"))
@@ -108,7 +112,7 @@ public class BackGroundWorker extends AsyncTask<String, String, String> {
             }
             else if (type.equals("teacher"))
             {
-                Intent intent = new Intent(context, teacherhome.class);
+                Intent intent = new Intent(context, TeacherHomeActivity.class);
                 context.startActivity(intent);
             }
             else {

@@ -5,7 +5,7 @@
     android:background="@drawable/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListNamesActivity">
+    tools:context=".activities.ListNamesActivity">
 
     <TextView
         android:id="@+id/tvPerformance"
@@ -24,6 +24,6 @@
         android:layout_below="@id/tvPerformance"
         android:layout_marginTop="10dp"
         android:divider="@color/colorWhite"
-        android:dividerHeight="2dp"></ListView>
+        android:dividerHeight="2dp"/>
 
 </RelativeLayout>

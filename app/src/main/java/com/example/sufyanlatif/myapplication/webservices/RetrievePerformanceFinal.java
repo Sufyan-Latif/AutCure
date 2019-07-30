@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.sufyanlatif.myapplication.Score;
+import com.example.sufyanlatif.myapplication.models.Score;
 import com.example.sufyanlatif.myapplication.TempActivity;
 import com.google.gson.Gson;
 

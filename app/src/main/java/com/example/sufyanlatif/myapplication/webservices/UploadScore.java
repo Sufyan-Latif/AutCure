@@ -26,6 +26,8 @@ public class UploadScore extends AsyncTask <String, String, String > {
 
     public UploadScore(Context ctx) {
         context = ctx;
+        progressDialog= new ProgressDialog(context);
+        progressDialog.setMessage("Loading... Please wait");
     }
 
     @Override
@@ -81,15 +83,16 @@ public class UploadScore extends AsyncTask <String, String, String > {
 
     @Override
     protected void onPreExecute() {
+        super.onPreExecute();
         progressDialog= new ProgressDialog(context);
         progressDialog.setMessage("Uploading Score...");
         progressDialog.show();
-        super.onPreExecute();
     }
 
     @Override
     protected void onPostExecute(String s) {
         Toast.makeText(context, "System Response : " + s,Toast.LENGTH_SHORT).show();
+        progressDialog.dismiss();
 
 //        context.finish();
 //            if (progressDialog.isShowing())
