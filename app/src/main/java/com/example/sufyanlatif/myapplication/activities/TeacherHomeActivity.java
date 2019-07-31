@@ -31,7 +31,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
-    Button communication, viewPerformance;
+    Button communication, viewPerformance, updateInfo;
     Teacher teacher;
 
     @Override
@@ -47,7 +47,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
         String username = sp.getString("username", "abc");
         String password = sp.getString("password", "xyz");
 
-        Log.d("TeacherHomeActivity.java", "username = "+username + " Password = "+password);
+        Log.d("TeacherHomeActivity", "username = "+username + " Password = "+password);
 
         teacher = Teacher.getInstance();
         if (teacher.getUsername()==null)
@@ -90,6 +90,15 @@ public class TeacherHomeActivity extends AppCompatActivity {
                 communication.execute("TeacherHomeActivity", teacher.getId(), "children");
 //                Intent intent= new Intent(TeacherHomeActivity.this, TeacherCommunicationActivity.class);
 //                startActivity(intent);
+            }
+        });
+
+        updateInfo = findViewById(R.id.btn_update_info);
+        updateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TeacherHomeActivity.this, UpdateInfoActivity.class);
+                startActivity(intent);
             }
         });
 //        communication.setOnClickListener(new View.OnClickListener() {

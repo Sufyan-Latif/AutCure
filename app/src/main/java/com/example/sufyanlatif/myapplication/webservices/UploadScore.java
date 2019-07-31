@@ -22,12 +22,12 @@ import java.net.URLEncoder;
 public class UploadScore extends AsyncTask <String, String, String > {
 
     Context context;
-    ProgressDialog progressDialog;
+    ProgressDialog myProgressDialog;
 
     public UploadScore(Context ctx) {
         context = ctx;
-        progressDialog= new ProgressDialog(context);
-        progressDialog.setMessage("Loading... Please wait");
+        myProgressDialog= new ProgressDialog(context);
+        myProgressDialog.setMessage("Loading... Please wait");
     }
 
     @Override
@@ -84,15 +84,15 @@ public class UploadScore extends AsyncTask <String, String, String > {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog= new ProgressDialog(context);
-        progressDialog.setMessage("Uploading Score...");
-        progressDialog.show();
+//        progressDialog= new ProgressDialog(context);
+//        progressDialog.setMessage("Uploading Score...");
+        myProgressDialog.show();
     }
 
     @Override
     protected void onPostExecute(String s) {
         Toast.makeText(context, "System Response : " + s,Toast.LENGTH_SHORT).show();
-        progressDialog.dismiss();
+//        myProgressDialog.dismiss();
 
 //        context.finish();
 //            if (progressDialog.isShowing())

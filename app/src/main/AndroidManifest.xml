@@ -14,9 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".activities.UpdateInfoActivity"></activity>
         <!-- <activity android:name=".MainActivity"/> -->
-
         <activity android:name=".activities.AnimationsActivity" />
         <activity android:name=".activities.TeacherSignupActivity" />
         <activity android:name=".activities.ParentSignupActivity" />
@@ -32,8 +31,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- <activity android:name=".MainActivity" /> -->
+        </activity> <!-- <activity android:name=".MainActivity" /> -->
         <activity
             android:name=".activities.GameDragActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -53,7 +51,7 @@
         <activity android:name=".TempActivity" />
         <activity android:name=".activities.TeacherCommunicationActivity" />
         <activity android:name=".activities.AnimalGameActivity" />
-        <activity android:name=".activities.VegetableGameActivity"></activity>
+        <activity android:name=".activities.VegetableGameActivity" />
     </application>
 
 </manifest>
