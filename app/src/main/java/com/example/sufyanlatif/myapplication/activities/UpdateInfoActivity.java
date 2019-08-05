@@ -1,6 +1,8 @@
 package com.example.sufyanlatif.myapplication.activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,8 +12,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -24,15 +30,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Teacher;
+import com.soundcloud.android.crop.Crop;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,6 +50,10 @@ public class UpdateInfoActivity extends AppCompatActivity {
     CircleImageView profileImage;
     String id;
     String URL = "https://autcureapp1.000webhostapp.com/upload_image.php";
+    ListView listViewUpdateInfo;
+//    Button cropImage;
+//    ImageView resultView;
+    EditText etAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,18 @@ public class UpdateInfoActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profile_image);
         editPhoto = findViewById(R.id.btn_edit_photo);
+        listViewUpdateInfo = findViewById(R.id.listview_update_info);
+
+//        cropImage= findViewById(R.id.btn_crop_photo);
+//
+//        cropImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                resultView = findViewById(R.id.resultView);
+//                Crop.pickImage(UpdateInfoActivity.this);
+//                resultView.setImageDrawable(null);
+//            }
+//        });
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -76,8 +98,6 @@ public class UpdateInfoActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(imageRequest);
 
-
-
         editPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +106,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
 //                i.setType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, 1);
+                startActivityForResult(Intent.createChooser(i, "Select Image"), 1);
 
 //                Intent intent = new Intent();
 //                intent.setType("image/*");
@@ -97,15 +117,50 @@ public class UpdateInfoActivity extends AppCompatActivity {
             }
         });
 
+        etAlertDialog = findViewById(R.id.et_update);
+        etAlertDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(UpdateInfoActivity.this);
+                LayoutInflater inflater = getLayoutInflater();
+
+                builder.setView(inflater.inflate(R.layout.update_info_layout, null))
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(UpdateInfoActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+//        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK){
+//            beginCrop(data.getData());
+//        }
+//        else if (requestCode == Crop.REQUEST_CROP){
+//            handleCrop(resultCode, data);
+//
+//        }
+
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null){
             Uri filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+
+//                Crop.pickImage(this);
                 profileImage.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -147,6 +202,20 @@ public class UpdateInfoActivity extends AppCompatActivity {
 //            newTagImage.setAdapter(imageAdapter);
         }
 
+    }
+
+    private void handleCrop(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK){
+//            resultView.setImageURI(Crop.getOutput(data));
+        }
+        else if (resultCode == Crop.RESULT_ERROR){
+            Toast.makeText(this, "Error : "+Crop.getError(data).getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void beginCrop(Uri data) {
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Crop.of(data, destination).asSquare().start(UpdateInfoActivity.this);
     }
 
     private String getStringImage(Bitmap bitmap) {

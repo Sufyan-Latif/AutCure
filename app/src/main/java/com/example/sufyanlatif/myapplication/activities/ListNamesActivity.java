@@ -120,10 +120,6 @@ public class ListNamesActivity extends AppCompatActivity {
         namesListView.setAdapter(adapter);
 
 
-
-
-
-
 //        HashMap<String, String> hashMap = (HashMap<String, String>) intent.getSerializableExtra("map");
 //        if (message.equals("MultipleChildren")) {
 //            HashMap<String, ArrayList<String>> hashMapMultiple = (HashMap<String, ArrayList<String>>) intent.getSerializableExtra("map");

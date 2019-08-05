@@ -7,6 +7,10 @@ import android.os.Bundle;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.fragments.TeacherSignupOneFragment;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class TeacherSignupActivity extends AppCompatActivity {
 
     @Override
