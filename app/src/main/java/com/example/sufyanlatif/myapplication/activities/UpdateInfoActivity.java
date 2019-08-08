@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
+import com.example.sufyanlatif.myapplication.adapters.UpdateInfoAdapter;
 import com.example.sufyanlatif.myapplication.models.Teacher;
 import com.soundcloud.android.crop.Crop;
 
@@ -51,6 +54,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
     String id;
     String URL = "https://autcureapp1.000webhostapp.com/upload_image.php";
     ListView listViewUpdateInfo;
+    RecyclerView updateInfoRecyclerView;
 //    Button cropImage;
 //    ImageView resultView;
     EditText etAlertDialog;
@@ -60,9 +64,20 @@ public class UpdateInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_info);
 
-        profileImage = findViewById(R.id.profile_image);
-        editPhoto = findViewById(R.id.btn_edit_photo);
-        listViewUpdateInfo = findViewById(R.id.listview_update_info);
+        bindViews();
+
+        String[] titles = {"First Name", "Last Name","Temp", "Temp2", "Password", "Username"};
+        String[] subtitles = {"Sufyan","Latif","Temp","Temp2", "12345", "hassan101"};
+        int[] icons = {R.drawable.ic_user,
+                R.drawable.ic_user,
+                R.drawable.ic_user,
+                R.drawable.ic_user,
+                R.drawable.ic_user,
+                R.drawable.ic_user};
+        updateInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        updateInfoRecyclerView.setAdapter(new UpdateInfoAdapter(titles, subtitles, icons));
+
+
 
 //        cropImage= findViewById(R.id.btn_crop_photo);
 //
@@ -121,10 +136,11 @@ public class UpdateInfoActivity extends AppCompatActivity {
         etAlertDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                displayDialog("", )
                 final AlertDialog.Builder builder = new AlertDialog.Builder(UpdateInfoActivity.this);
                 LayoutInflater inflater = getLayoutInflater();
 
-                builder.setView(inflater.inflate(R.layout.update_info_layout, null))
+                builder.setView(inflater.inflate(R.layout.update_info_alert_dialog_layout, null))
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -141,6 +157,13 @@ public class UpdateInfoActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    private void bindViews() {
+        profileImage = findViewById(R.id.profile_image);
+        editPhoto = findViewById(R.id.btn_edit_photo);
+        listViewUpdateInfo = findViewById(R.id.listview_update_info);
+        updateInfoRecyclerView = findViewById(R.id.update_info_recycler_view);
     }
 
     @Override
