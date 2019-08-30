@@ -8,8 +8,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.activities.ListNamesActivity;
+import com.example.sufyanlatif.myapplication.activities.PerformanceActivity;
 import com.example.sufyanlatif.myapplication.models.Score;
-import com.example.sufyanlatif.myapplication.TempActivity;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -51,7 +52,7 @@ public class Performance extends AsyncTask<String, String, String> {
         String type="retrieve_performance";
         id_type = strings[0];
         id = strings[1];
-        String login_url = "https://autcureapp1.000webhostapp.com/performance.php";
+        String login_url = Constants.BASE_URL + "performance.php";
         if (type.equals("retrieve_performance")) {
             try {
                 URL url = new URL(login_url);
@@ -105,7 +106,7 @@ public class Performance extends AsyncTask<String, String, String> {
 
             if (id_type.equals("children")){
                 Map<Integer, Score> scoreMap= new LinkedHashMap<>(jsonArray.length());
-                Intent performanceIntent = new Intent(context, TempActivity.class);
+                Intent performanceIntent = new Intent(context, PerformanceActivity.class);
 
                 for (int i=0; i<jsonArray.length(); i++){
                     JSONObject jo= jsonArray.getJSONObject(i);
@@ -218,7 +219,8 @@ public class Performance extends AsyncTask<String, String, String> {
 */
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(context, "Error!!! : " + e,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No Games Played Yet",Toast.LENGTH_SHORT).show();
+            Log.e("PerformanceError", "Error!!! : " + e);
         }
 
 //        context.finish();

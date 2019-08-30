@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.activities.ListNamesActivity;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 //import com.example.sufyanlatif.myapplication.ProgressDialogStatic;
 
 import org.json.JSONArray;
@@ -43,7 +44,7 @@ public class RetrievePerformance extends AsyncTask<String, String, String> {
 
         String type = strings[0];
         String username = strings[1];
-        String login_url = "https://autcureapp1.000webhostapp.com/retrieve_performance.php";
+        String login_url = Constants.BASE_URL + "retrieve_performance.php";
         if (type.equals("retrieve_performance")) {
             try {
                 URL url = new URL(login_url);

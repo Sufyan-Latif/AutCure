@@ -33,8 +33,6 @@ public class UploadScore extends AsyncTask <String, String, String > {
     @Override
     protected String doInBackground(String... strings) {
 
-
-
         String type = strings[0];
         String game_name = strings[1];
         String username = strings[2];
@@ -91,7 +89,7 @@ public class UploadScore extends AsyncTask <String, String, String > {
 
     @Override
     protected void onPostExecute(String s) {
-        Toast.makeText(context, "System Response : " + s,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "System Response : " + s,Toast.LENGTH_SHORT).show();
 //        myProgressDialog.dismiss();
 
 //        context.finish();

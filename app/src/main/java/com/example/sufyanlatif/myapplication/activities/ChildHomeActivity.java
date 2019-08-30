@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.R;
@@ -26,14 +27,22 @@ public class ChildHomeActivity extends AppCompatActivity {
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
+    ImageView imgNewTask;
     Child child;
 
-    Button viewAnimations, playGames;
+    Button viewAnimations, playGames, viewTasks;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        imgNewTask.setVisibility(View.INVISIBLE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_home);
+        imgNewTask = findViewById(R.id.img_new_task);
 
         sp = getSharedPreferences("myLoginData", 0);
         String username = sp.getString("username", "abc");
@@ -55,6 +64,14 @@ public class ChildHomeActivity extends AppCompatActivity {
                 Toast.makeText(ChildHomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
         }
 
+        viewTasks = findViewById(R.id.btnViewTasks);
+        viewTasks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChildHomeActivity.this, GameDragActivity.class);
+                startActivity(intent);
+            }
+        });
         playGames = findViewById(R.id.btnPlayGames);
         playGames.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +153,7 @@ public class ChildHomeActivity extends AppCompatActivity {
             String firstName= child.getFirstName();
             AlertDialog.Builder builder = new AlertDialog.Builder(ChildHomeActivity.this);
             builder.setTitle("Alert!!!")
-                    .setMessage(firstName + "Are you sure you want to logout?")
+                    .setMessage("Are you sure you want to logout?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

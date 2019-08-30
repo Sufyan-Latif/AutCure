@@ -25,7 +25,7 @@ import com.example.sufyanlatif.myapplication.webservices.UserRecord;
 
 public class ParentHomeActivity extends AppCompatActivity {
 
-    Button viewPerformance, parentCommunication;
+    Button viewPerformance, parentCommunication, btnUpdateInfo;
     Parent parent;
 
     SharedPreferences sp;
@@ -37,6 +37,7 @@ public class ParentHomeActivity extends AppCompatActivity {
 
         viewPerformance= findViewById(R.id.btnParentViewPerformance);
         parentCommunication= findViewById(R.id.btnParentCommunication);
+        btnUpdateInfo = findViewById(R.id.btnParentUpdateInfo);
 
         sp = getSharedPreferences("myLoginData", 0);
         editor = sp.edit();
@@ -86,6 +87,14 @@ public class ParentHomeActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+
+        btnUpdateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ParentHomeActivity.this, UpdateInfoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -111,6 +120,7 @@ public class ParentHomeActivity extends AppCompatActivity {
                             editor = sp.edit();
                             editor.remove("type");
                             editor.apply();
+                            parent.remove();
                             Intent intent = new Intent(ParentHomeActivity.this, AuthenticationActivity.class);
                             finish();
                             startActivity(intent);

@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.sufyanlatif.myapplication.activities.PerformanceActivity;
 import com.example.sufyanlatif.myapplication.models.Score;
-import com.example.sufyanlatif.myapplication.TempActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -93,7 +93,7 @@ public class RetrievePerformanceFinal extends AsyncTask<String, String, String> 
     protected void onPostExecute(String s) {
         Log.d("RetrievePerformanceFina", "Response : "+s);
         JSONObject jsonObject = null;
-        Intent intent= new Intent(context, TempActivity.class);
+        Intent intent= new Intent(context, PerformanceActivity.class);
         try {
             Log.d("RetrievePerformanceFina", "Response : "+s);
             jsonObject = new JSONObject(s);

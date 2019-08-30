@@ -1,7 +1,8 @@
-package com.example.sufyanlatif.myapplication;
+package com.example.sufyanlatif.myapplication.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Score;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,21 +24,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TempActivity extends AppCompatActivity {
+public class PerformanceActivity extends AppCompatActivity {
 
     ListView listView;
 //    TextView tvgame, tvcorrect, tvincorrect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp);
+        setContentView(R.layout.activity_performance);
 
         listView= findViewById(R.id.listView);
 
         ArrayList<String> games= new ArrayList<>();
         ArrayList<String> correct= new ArrayList<>();
         ArrayList<String> incorrect= new ArrayList<>();
-
 
         Intent intent= getIntent();
         Gson gson= new Gson();
@@ -54,7 +55,7 @@ public class TempActivity extends AppCompatActivity {
 //            Log.d("RetrievePerformanceFina", b+ " "+b.id+" "+b.correct+" "+b.incorrect);
         }
 
-        MyAdapter adapter= new MyAdapter(TempActivity.this, games, correct, incorrect);
+        MyAdapter adapter= new MyAdapter(PerformanceActivity.this, games, correct, incorrect);
         listView.setAdapter(adapter);
 
 /*
@@ -112,9 +113,21 @@ class MyAdapter extends ArrayAdapter{
         TextView correct= row.findViewById(R.id.tvcorrect);
         TextView incorrect= row.findViewById(R.id.tvincorrect);
 
-        tvGameId.setText(gamesList.get(position));
-        correct.setText(correctList.get(position));
-        incorrect.setText(incorrectList.get(position));
+        if (gamesList.get(position).equals("1"))
+            tvGameId.setText("Put the Balls in Basket");
+        else if (gamesList.get(position).equals("2"))
+            tvGameId.setText("Put the Shapes");
+//        tvGameId.setText(gamesList.get(position));
+//        correct.setText(correctList.get(position));
+//        incorrect.setText(incorrectList.get(position));
+
+        correct.setText("");
+        int score = Integer.valueOf(correctList.get(position)) - Integer.valueOf(incorrectList.get(position));
+        if (score<=0){
+            incorrect.setTextColor(Color.RED);
+        }
+
+        incorrect.setText(""+score);
 
         return row;
     }

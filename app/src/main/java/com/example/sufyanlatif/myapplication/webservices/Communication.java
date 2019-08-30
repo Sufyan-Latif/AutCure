@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.activities.ListNamesActivity;
 import com.example.sufyanlatif.myapplication.activities.TeacherCommunicationActivity;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -50,7 +51,7 @@ public class Communication extends AsyncTask<String, String, String>{
         id = strings[1];
         table = strings[2];
 
-        String login_url = "https://autcureapp1.000webhostapp.com/communication.php";
+        String login_url = Constants.BASE_URL + "communication.php";
         if (type.equals("communication")) {
             try {
                 URL url = new URL(login_url);
@@ -125,7 +126,7 @@ public class Communication extends AsyncTask<String, String, String>{
                 context.startActivity(intent);
 
 //                Map<Integer, Score> scoreMap= new LinkedHashMap<>(jsonArray.length());
-//                Intent performanceIntent = new Intent(context, TempActivity.class);
+//                Intent performanceIntent = new Intent(context, PerformanceActivity.class);
 
 //
 //                for (int i=0; i<jsonArray.length(); i++){
@@ -278,7 +279,8 @@ public class Communication extends AsyncTask<String, String, String>{
 */
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(context, "Error!!! : " + e,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "User not registered OR\nContact details might be hidden by user",Toast.LENGTH_LONG).show();
+            Log.e("CommunicationError", "Error!!! : " + e);
         }
 
 //        context.finish();

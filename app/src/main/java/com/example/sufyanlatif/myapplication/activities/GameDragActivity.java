@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Child;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.example.sufyanlatif.myapplication.webservices.UploadScore;
 
 import java.io.BufferedReader;
@@ -36,6 +37,7 @@ import library.shmehdi.dragger.Dragger;
 
 public class GameDragActivity extends AppCompatActivity {
 
+    Child child = Child.getInstance();
     ImageView redBall, blueBall, greenBall, blueBasket, redBasket, greenBasket;
     TextView tvCorrectBalls, tvIncorrectBalls;
     int correctBall = 0, incorrectBall = 0;
@@ -179,12 +181,9 @@ public class GameDragActivity extends AppCompatActivity {
 //    };
 
     public void showDialog() {
-        Child child = Child.getInstance();
         final String username = child.getUsername();
-        String firstName = child.getFirstName();
-        Toast.makeText(GameDragActivity.this, "First Name : " + firstName, Toast.LENGTH_SHORT).show();
         AlertDialog.Builder builder = new AlertDialog.Builder(GameDragActivity.this)
-                .setMessage(username + "Game completed!!!\nDo you want to play again?")
+                .setMessage("Game completed!!!\nDo you want to play again?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -199,7 +198,8 @@ public class GameDragActivity extends AppCompatActivity {
                         uploadScore.execute(
                                 "upload_score",
                                 "Put the Balls in Basket",
-                                "sufyan101",
+                                child.getUsername(),
+//                                "sufyan101",
                                 Integer.toString(correctBall),
                                 Integer.toString(incorrectBall)
                         );
@@ -217,7 +217,7 @@ public class GameDragActivity extends AppCompatActivity {
         Child child = Child.getInstance();
         String username = child.getUsername();
         AlertDialog.Builder builder = new AlertDialog.Builder(GameDragActivity.this)
-                .setMessage(username + "Are you sure you want to exit ?")
+                .setMessage("Are you sure you want to exit ?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -292,7 +292,7 @@ public class GameDragActivity extends AppCompatActivity {
             String username = strings[2];
             String correct = strings[3];
             String incorrect = strings[4];
-            String login_url = "https://autcureapp1.000webhostapp.com/upload_score.php";
+            String login_url = Constants.BASE_URL + "upload_score.php";
             if (type.equals("upload_score")) {
                 try {
                     URL url = new URL(login_url);

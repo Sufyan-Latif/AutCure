@@ -14,11 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.R;
+import com.example.sufyanlatif.myapplication.models.Child;
+import com.example.sufyanlatif.myapplication.webservices.UploadScore;
 
 import library.shmehdi.dragger.Dragger;
 
 public class GameMatchShapeActivity extends AppCompatActivity {
 
+    Child child = Child.getInstance();
     ImageView squareShape, circleShape, rectangleShape;
     TextView tvSquare, tvCircle, tvRectangle, tvCorrectShape, tvIncorrectShape;
     int correctShapeScore = 0, incorrectShapeScore = 0;
@@ -168,6 +171,15 @@ public class GameMatchShapeActivity extends AppCompatActivity {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        UploadScore uploadScore = new UploadScore(GameMatchShapeActivity.this);
+                        uploadScore.execute(
+                                "upload_score",
+                                "Put the Shapes at Correct Position",
+                                child.getUsername(),
+                                Integer.toString(correctShapeScore),
+                                Integer.toString(incorrectShapeScore)
+                        );
                         finish();
                     }
                 });

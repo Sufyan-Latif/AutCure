@@ -56,6 +56,19 @@
         android:background="@drawable/button"
         android:text="View Tasks"
         />
+
+    <ImageView
+        android:id="@+id/img_new_task"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_looks_one_black_24dp"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/btnPlayGames"
+        android:layout_above="@id/viewAnimations"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        />
+
     <Button
         android:id="@+id/viewAnimations"
         android:layout_width="match_parent"

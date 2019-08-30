@@ -15,6 +15,15 @@ public class Child {
         return instance;
     }
 
+
+    private void remove(){
+        this.id = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.username = null;
+        this.password = null;
+    }
+
     private Child() {
     }
 

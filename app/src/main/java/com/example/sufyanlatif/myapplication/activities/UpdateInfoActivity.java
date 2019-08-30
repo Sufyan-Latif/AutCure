@@ -8,13 +8,16 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +35,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.adapters.UpdateInfoAdapter;
+import com.example.sufyanlatif.myapplication.models.Parent;
 import com.example.sufyanlatif.myapplication.models.Teacher;
 import com.soundcloud.android.crop.Crop;
 
@@ -51,13 +55,17 @@ public class UpdateInfoActivity extends AppCompatActivity {
     Button editPhoto;
     Bitmap bitmap;
     CircleImageView profileImage;
+    ImageView imgEditPhoto;
     String id;
     String URL = "https://autcureapp1.000webhostapp.com/upload_image.php";
-    ListView listViewUpdateInfo;
+//    ListView listViewUpdateInfo;
     RecyclerView updateInfoRecyclerView;
 //    Button cropImage;
 //    ImageView resultView;
     EditText etAlertDialog;
+    Teacher teacher = Teacher.getInstance();
+    Parent parent = Parent.getInstance();
+    String[] subtitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +74,49 @@ public class UpdateInfoActivity extends AppCompatActivity {
 
         bindViews();
 
-        String[] titles = {"First Name", "Last Name","Temp", "Temp2", "Password", "Username"};
-        String[] subtitles = {"Sufyan","Latif","Temp","Temp2", "12345", "hassan101"};
+        String[] titles = {"First Name", "Last Name","Username", "Password", "Address"};
+        if (parent.getUsername() != null){
+            subtitles = new String[]{parent.getFirstName(), parent.getLastName(),
+                    parent.getUsername(), "******", parent.getAddress()};
+        }
+        else {
+            subtitles = new String[]{teacher.getFirstName(), teacher.getLastName(),
+                    teacher.getUsername(), "******", teacher.getAddress()};
+        }
         int[] icons = {R.drawable.ic_user,
                 R.drawable.ic_user,
                 R.drawable.ic_user,
-                R.drawable.ic_user,
-                R.drawable.ic_user,
-                R.drawable.ic_user};
+                R.drawable.ic_lock,
+                R.drawable.ic_address};
         updateInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateInfoRecyclerView.setAdapter(new UpdateInfoAdapter(titles, subtitles, icons));
 
+/*
+        updateInfoRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+//                int i = motionEvent.findPointerIndex(0);
+//                Log.d("recyclerViewId", "onInterceptTouchEvent : "+i);
+//                recyclerView.getChildPosition(new View)
+                View childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                int i = recyclerView.getChildLayoutPosition(childView);
+                Log.d("myRecyclerViewId", "onInterceptTouchEvent : "+i);
+                return true;
+            }
 
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+//                int i = motionEvent.findPointerIndex(0);
+//                Log.d("recyclerViewId", "onTouchEvent : "+i);
 
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean b) {
+
+            }
+        });
+*/
 //        cropImage= findViewById(R.id.btn_crop_photo);
 //
 //        cropImage.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +131,11 @@ public class UpdateInfoActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-        String RETRIEVE_URL = "https://autcureapp1.000webhostapp.com/images/1.jpeg";
+        String RETRIEVE_URL;
+        if (teacher.getId() != null)
+            RETRIEVE_URL = "https://autcureapp1.000webhostapp.com/images/teacher1.jpeg";
+        else
+            RETRIEVE_URL = "https://autcureapp1.000webhostapp.com/images/parent1.jpeg";
         ImageRequest imageRequest = new ImageRequest(RETRIEVE_URL,
                 new Response.Listener<Bitmap>() {
                     @Override
@@ -113,6 +155,12 @@ public class UpdateInfoActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(imageRequest);
 
+        imgEditPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editPhoto.callOnClick();
+            }
+        });
         editPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,8 +209,9 @@ public class UpdateInfoActivity extends AppCompatActivity {
 
     private void bindViews() {
         profileImage = findViewById(R.id.profile_image);
+        imgEditPhoto = findViewById(R.id.img_edit_photo);
         editPhoto = findViewById(R.id.btn_edit_photo);
-        listViewUpdateInfo = findViewById(R.id.listview_update_info);
+//        listViewUpdateInfo = findViewById(R.id.listview_update_info);
         updateInfoRecyclerView = findViewById(R.id.update_info_recycler_view);
     }
 
@@ -189,8 +238,11 @@ public class UpdateInfoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Teacher teacher = Teacher.getInstance();
-            id = teacher.getId();
+//            Teacher teacher = Teacher.getInstance();
+            if (teacher.getId() != null)
+                id = teacher.getId();
+            else
+                id = parent.getId();
 
             uploadPicture(id, getStringImage(bitmap));
         }
@@ -224,7 +276,6 @@ public class UpdateInfoActivity extends AppCompatActivity {
 //            imageAdapter.notifyDataSetChanged();
 //            newTagImage.setAdapter(imageAdapter);
         }
-
     }
 
     private void handleCrop(int resultCode, Intent data) {
@@ -265,8 +316,8 @@ public class UpdateInfoActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
 
-                            if (success.equals("1"))
-                                Toast.makeText(UpdateInfoActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+//                            if (success.equals("1"))
+//                                Toast.makeText(UpdateInfoActivity.this, "Successfully uploaded", Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -285,7 +336,10 @@ public class UpdateInfoActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("id", id);
+                if (teacher.getId() != null)
+                    params.put("id", "teacher"+id);
+                else
+                    params.put("id", "parent"+id);
                 params.put("photo", photo);
                 return params;
             }

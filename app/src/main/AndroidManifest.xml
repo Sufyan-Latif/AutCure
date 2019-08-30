@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.TempActivity"></activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-        <activity android:name=".activities.UpdateInfoActivity"></activity>
-        <!-- <activity android:name=".MainActivity"/> -->
+        <activity android:name=".activities.UpdateInfoActivity" /> <!-- <activity android:name=".MainActivity"/> -->
         <activity android:name=".activities.AnimationsActivity" />
         <activity android:name=".activities.TeacherSignupActivity" />
         <activity android:name=".activities.ParentSignupActivity" />
@@ -50,7 +50,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ListNamesActivity" />
         <activity android:name=".PerformanceFinalActivity" />
-        <activity android:name=".TempActivity" />
+        <activity
+            android:name=".activities.PerformanceActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.TeacherCommunicationActivity" />
         <activity android:name=".activities.AnimalGameActivity" />
         <activity android:name=".activities.VegetableGameActivity" />

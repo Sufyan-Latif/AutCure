@@ -19,11 +19,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Teacher;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.example.sufyanlatif.myapplication.webservices.Communication;
 import com.example.sufyanlatif.myapplication.webservices.Performance;
 import com.example.sufyanlatif.myapplication.webservices.UserRecord;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TeacherHomeActivity extends AppCompatActivity {
 
@@ -31,7 +48,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
-    Button communication, viewPerformance, updateInfo;
+    Button communication, viewPerformance,assignTasks, updateInfo;
     Teacher teacher;
 
     @Override
@@ -85,6 +102,23 @@ public class TeacherHomeActivity extends AppCompatActivity {
         communication = findViewById(R.id.btnTeacherCommunication);
         communication.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View view) {
+                Communication communication= new Communication(TeacherHomeActivity.this);
+                communication.execute("TeacherHomeActivity", teacher.getId(), "children");
+            }
+        });
+
+        assignTasks = findViewById(R.id.btn_assign_tasks);
+        assignTasks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TeacherHomeActivity.this, TempActivity.class);
+                startActivity(intent);
+            }
+        });
+        /*
+        communication.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Communication communication= new Communication(TeacherHomeActivity.this);
                 communication.execute("TeacherHomeActivity", teacher.getId(), "children");
@@ -92,6 +126,60 @@ public class TeacherHomeActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+
+        assignTasks = findViewById(R.id.btn_assign_tasks);
+        assignTasks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringRequest request = new StringRequest(Request.Method.POST, Constants.BASE_URL + "assign_tasks.php",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    String code = jsonObject.getString("code");
+
+                                    if (code.equals("success")){
+                                        ArrayList<String> ids = new ArrayList<>();
+                                        ArrayList<String> names = new ArrayList<>();
+                                        JSONArray jsonArray = jsonObject.getJSONArray("children");
+
+                                        for(int j = 0; j<jsonArray.length(); j++) {
+                                            JSONObject jsonObject1 = jsonArray.getJSONObject(j);
+                                            ids.add(jsonObject1.getString("id"));
+                                            names.add(jsonObject1.getString("first_name")
+                                                    + jsonObject1.getString("last_name"));
+                                        }
+                                    }
+                                    else {
+                                        Toast.makeText(TeacherHomeActivity.this,
+                                                ""+jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("assignTasksError", ""+error);
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        HashMap<String,String> hashMap= new HashMap<String, String>();
+                        hashMap.put("teacher_id", teacher.getId());
+                        hashMap.put("activity", "TeacherHomeActivity");
+                        return hashMap;
+                    }
+                };
+                Volley.newRequestQueue(TeacherHomeActivity.this).add(request);
+
+            }
+        });
+
+        */
 
         updateInfo = findViewById(R.id.btn_update_info);
         updateInfo.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +252,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
                             editor = sp.edit();
                             editor.remove("type");
                             editor.apply();
+                            teacher.remove();
                             Intent intent = new Intent(TeacherHomeActivity.this, AuthenticationActivity.class);
                             finish();
                             startActivity(intent);

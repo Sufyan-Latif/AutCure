@@ -14,6 +14,15 @@ public class Parent {
         return instance;
     }
 
+
+    public void remove(){
+        this.id = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.username = null;
+        this.password = null;
+    }
+
     private Parent() {
     }
 

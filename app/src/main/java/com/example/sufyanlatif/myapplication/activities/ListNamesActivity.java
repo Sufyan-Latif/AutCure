@@ -32,7 +32,7 @@ public class ListNamesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_performance);
+        setContentView(R.layout.activity_list_names);
 
         tvList = findViewById(R.id.tvPerformance);
         namesListView = findViewById(R.id.names);
@@ -59,7 +59,11 @@ public class ListNamesActivity extends AppCompatActivity {
 
         ArrayList<String> completeName = new ArrayList<String>();
 
-        if (callFrom.equals("Communication.java teacher")){
+        if (callFrom.equalsIgnoreCase("ParentHomeActivity")){
+            tvList.setText("Assign Task to !!!");
+
+        }
+        else if (callFrom.equals("Communication.java teacher")){
             tvList.setText("Select a parent to communicate from the list !!!");
             for (int i = 0; i < ids.size(); i++) {
                 completeName.add(firstName.get(i) + " " + lastName.get(i)+ "'s Parents");
