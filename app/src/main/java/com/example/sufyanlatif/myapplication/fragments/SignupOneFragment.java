@@ -104,11 +104,9 @@ public class SignupOneFragment extends Fragment {
                                             if (Constants.currModel.equals("child"))
                                                 fragmentTransaction.replace(R.id.fragmentContainer, new SignupTwoChildFragment());
                                             if (Constants.currModel.equals("teacher"))
-                                                //TODO: Add teacher fragment
-//                                                fragmentTransaction.replace(R.id.fragmentContainer, new SignupTwoChildFragment());
+                                                fragmentTransaction.replace(R.id.fragmentContainer, new SignupTwoTeacherFragment());
                                             if (Constants.currModel.equals("parent"))
-                                                //TODO: Add parent fragment
-//                                                fragmentTransaction.replace(R.id.fragmentContainer, new SignupTwoChildFragment());
+                                                fragmentTransaction.replace(R.id.fragmentContainer, new SignupTwoParentFragment());
                                             progressDialog.dismiss();
 
                                             fragmentTransaction.commit();
