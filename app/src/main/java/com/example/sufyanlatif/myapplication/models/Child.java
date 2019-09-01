@@ -3,9 +3,7 @@ package com.example.sufyanlatif.myapplication.models;
 public class Child {
     private static Child instance = null;
 
-    String id;
-    String firstName, lastName, username, password, address, gender;
-    int level;
+    String id, firstName, lastName, username, password, address, gender, dateOfBirth, level;
 
     public static Child getInstance() {
 
@@ -71,9 +69,7 @@ public class Child {
         return this.address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    public void setAddress(String address) { this.address = address; }
 
     public String getGender() {
         return this.gender;
@@ -83,11 +79,19 @@ public class Child {
         this.gender = gender;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return this.level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

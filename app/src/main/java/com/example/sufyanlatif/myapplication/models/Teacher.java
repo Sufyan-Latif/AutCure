@@ -4,7 +4,7 @@ public class Teacher {
     private static Teacher instance = null;
 
     String id;
-    String firstName, lastName, username, password, address, gender, associated;
+    String firstName, lastName, username, password, address, gender, associated, phoneNumber, emailAddress;
 
     public static Teacher getInstance() {
 
@@ -86,5 +86,21 @@ public class Teacher {
 
     public void setAssociated(String associated) {
         this.associated = associated;
+    }
+
+    public String getphoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmailAddress() {
+        return this.emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 }

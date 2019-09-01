@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Child;
+import com.example.sufyanlatif.myapplication.utils.Constants;
+import com.example.sufyanlatif.myapplication.utils.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +57,8 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
+        Constants.currModel = "";
+
         user_name = findViewById(R.id.editText);
         pass_word = findViewById(R.id.editText1);
         coordinatorLayout = findViewById(R.id.snackBarLayout);
@@ -64,15 +68,16 @@ public class AuthenticationActivity extends AppCompatActivity {
         sp = getSharedPreferences("myLoginData", 0);
         if (!sp.getString("type", "null").equals(null)) {
 
-            boolean connected = false;
-            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                //we are connected to a network
-                connected = true;
-            } else
-                connected = false;
-            if (connected) {
+//            boolean connected = false;
+//            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//            if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+//                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+//                //we are connected to a network
+//                connected = true;
+//            } else
+//                connected = false;
+
+//            if (Utility.isInternetConnected(getApplicationContext())) {
                 if (sp.getString("type", "null").equals("parents")) {
                     Intent intent = new Intent(AuthenticationActivity.this, ParentHomeActivity.class);
                     finish();
@@ -87,10 +92,9 @@ public class AuthenticationActivity extends AppCompatActivity {
                     finish();
                     startActivity(intent);
                 }
-            }
+//            }
 //            else
 //                Toast.makeText(AuthenticationActivity.this, "No Internet connection", Toast.LENGTH_SHORT).show();
-
         }
         final Button login = findViewById(R.id.button5);
         login.setOnClickListener(new View.OnClickListener() {
@@ -98,15 +102,15 @@ public class AuthenticationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = user_name.getText().toString();
                 String password = pass_word.getText().toString();
-                boolean connected = false;
-                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                    //we are connected to a network
-                    connected = true;
-                } else
-                    connected = false;
-                if (connected) {
+//                boolean connected = false;
+//                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+//                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+//                    we are connected to a network
+//                    connected = true;
+//                } else
+//                    connected = false;
+                if (Utility.isInternetConnected(getApplicationContext())) {
                     BackGroundWorkerInner backGroundWorkerInner = new BackGroundWorkerInner(AuthenticationActivity.this);
                     backGroundWorkerInner.execute("login", username, password);
                 } else {
@@ -134,19 +138,25 @@ public class AuthenticationActivity extends AppCompatActivity {
                         .setItems(users, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Intent newIntent = new Intent(AuthenticationActivity.this, SignupActivity.class);
                                 if (which == 0) {
-                                    Intent intent = new Intent(AuthenticationActivity.this, TeacherSignupActivity.class);
-                                    finish();
-                                    startActivity(intent);
+                                    Constants.currModel = "teacher";
+//                                    Intent intent = new Intent(AuthenticationActivity.this, TeacherSignupActivity.class);
+//                                    finish();
+//                                    startActivity(intent);
                                 } else if (which == 1) {
-                                    Intent intent = new Intent(AuthenticationActivity.this, ParentSignupActivity.class);
-                                    finish();
-                                    startActivity(intent);
+                                    Constants.currModel = "parent";
+//                                    Intent intent = new Intent(AuthenticationActivity.this, ParentSignupActivity.class);
+//                                    finish();
+//                                    startActivity(intent);
                                 } else {
-                                    Intent intent = new Intent(AuthenticationActivity.this, ChildSignupActivity.class);
-                                    finish();
-                                    startActivity(intent);
+                                    Constants.currModel = "child";
+//                                    Intent intent = new Intent(AuthenticationActivity.this, ChildSignupActivity.class);
+//                                    finish();
+//                                    startActivity(intent);
                                 }
+                                finish();
+                                startActivity(newIntent);
                             }
                         })
                         .setNegativeButton("Cancel", null);
