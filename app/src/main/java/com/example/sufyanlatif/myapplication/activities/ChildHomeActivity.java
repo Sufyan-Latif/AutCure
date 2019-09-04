@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Child;
+import com.example.sufyanlatif.myapplication.utils.Utility;
 import com.example.sufyanlatif.myapplication.webservices.UserRecord;
 
 public class ChildHomeActivity extends AppCompatActivity {
@@ -56,7 +57,7 @@ public class ChildHomeActivity extends AppCompatActivity {
         child = Child.getInstance();
         if (child.getUsername()==null)
         {
-            if ( isInternetConnected() ){
+            if (Utility.isInternetConnected(this)){
                 UserRecord userRecord = new UserRecord(ChildHomeActivity.this);
                 userRecord.execute("getRecord","child", username, password);
             }
@@ -76,21 +77,37 @@ public class ChildHomeActivity extends AppCompatActivity {
         playGames.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String games[] = {"Put the balls in Basket", "Match the shapes", "Fill Colors", "Animals"};
+                String games[] = {"Put the balls in Basket", "Match the shapes", "Choose the Animal", "Choose the fruit", "Choose the vegetable"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChildHomeActivity.this)
                         .setTitle("Select the game !")
                         .setItems(games, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (which == 0) {
-                                    Intent intent = new Intent(ChildHomeActivity.this, GameDragActivity.class);
-                                    startActivity(intent);
-                                } else if (which == 1) {
-                                    Intent intent = new Intent(ChildHomeActivity.this, GameMatchShapeActivity.class);
-                                    startActivity(intent);
-                                } else if (which == 3) {
-                                    Intent intent = new Intent(ChildHomeActivity.this, AnimalGameActivity.class);
-                                    startActivity(intent);
+                                Intent intent;
+                                switch (which){
+                                    case 0:
+                                        intent = new Intent(ChildHomeActivity.this, GameDragActivity.class);
+                                        startActivity(intent);
+                                        break;
+                                    case 1:
+                                        intent = new Intent(ChildHomeActivity.this, GameMatchShapeActivity.class);
+                                        startActivity(intent);
+                                        break;
+                                    case 2:
+                                        intent = new Intent(ChildHomeActivity.this, AnimalGameActivity.class);
+                                        intent.putExtra("game", "Choose the Animal");
+                                        startActivity(intent);
+                                        break;
+                                    case 3:
+                                        intent = new Intent(ChildHomeActivity.this, AnimalGameActivity.class);
+                                        intent.putExtra("game", "Choose the Fruit");
+                                        startActivity(intent);
+                                        break;
+                                    case 4:
+                                        intent = new Intent(ChildHomeActivity.this, AnimalGameActivity.class);
+                                        intent.putExtra("game", "Choose the Vegetable");
+                                        startActivity(intent);
+                                        break;
                                 }
                             }
                         })

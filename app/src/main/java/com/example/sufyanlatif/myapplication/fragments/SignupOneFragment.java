@@ -64,26 +64,28 @@ public class SignupOneFragment extends Fragment {
                     Toast.makeText(view.getContext(), "Password Mismatch", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    if (Constants.currModel.equals("child")){
-                        Child child = Child.getInstance();
-                        child.setFirstName(etFirstName.getText().toString());
-                        child.setLastName(etLastName.getText().toString());
-                        child.setUsername(etUsername.getText().toString());
-                        child.setPassword(etPassword.getText().toString());
-                    }
-                    else if (Constants.currModel.equals("teacher")){
-                        Teacher teacher = Teacher.getInstance();
-                        teacher.setFirstName(etFirstName.getText().toString());
-                        teacher.setLastName(etLastName.getText().toString());
-                        teacher.setUsername(etUsername.getText().toString());
-                        teacher.setPassword(etPassword.getText().toString());
-                    }
-                    else if (Constants.currModel.equals("parent")){
-                        Parent parent = Parent.getInstance();
-                        parent.setFirstName(etFirstName.getText().toString());
-                        parent.setLastName(etLastName.getText().toString());
-                        parent.setUsername(etUsername.getText().toString());
-                        parent.setPassword(etPassword.getText().toString());
+                    switch (Constants.currModel) {
+                        case "child":
+                            Child child = Child.getInstance();
+                            child.setFirstName(etFirstName.getText().toString());
+                            child.setLastName(etLastName.getText().toString());
+                            child.setUsername(etUsername.getText().toString());
+                            child.setPassword(etPassword.getText().toString());
+                            break;
+                        case "teacher":
+                            Teacher teacher = Teacher.getInstance();
+                            teacher.setFirstName(etFirstName.getText().toString());
+                            teacher.setLastName(etLastName.getText().toString());
+                            teacher.setUsername(etUsername.getText().toString());
+                            teacher.setPassword(etPassword.getText().toString());
+                            break;
+                        case "parent":
+                            Parent parent = Parent.getInstance();
+                            parent.setFirstName(etFirstName.getText().toString());
+                            parent.setLastName(etLastName.getText().toString());
+                            parent.setUsername(etUsername.getText().toString());
+                            parent.setPassword(etPassword.getText().toString());
+                            break;
                     }
 
                     final ProgressDialog progressDialog = new ProgressDialog(view.getContext());

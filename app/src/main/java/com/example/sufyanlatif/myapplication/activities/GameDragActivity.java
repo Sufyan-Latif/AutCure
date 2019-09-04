@@ -199,7 +199,6 @@ public class GameDragActivity extends AppCompatActivity {
                                 "upload_score",
                                 "Put the Balls in Basket",
                                 child.getUsername(),
-//                                "sufyan101",
                                 Integer.toString(correctBall),
                                 Integer.toString(incorrectBall)
                         );

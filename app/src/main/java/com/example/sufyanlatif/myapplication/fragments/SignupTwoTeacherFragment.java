@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.activities.ChildHomeActivity;
+import com.example.sufyanlatif.myapplication.activities.TeacherHomeActivity;
 import com.example.sufyanlatif.myapplication.models.Teacher;
 import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.example.sufyanlatif.myapplication.utils.Utility;
@@ -101,7 +102,7 @@ public class SignupTwoTeacherFragment extends Fragment {
                                         if (object.getString("code").equalsIgnoreCase("success")) {
 
                                             progressDialog.dismiss();
-                                            Intent intent= new Intent(getActivity().getBaseContext(), ChildHomeActivity.class);
+                                            Intent intent= new Intent(getActivity().getBaseContext(), TeacherHomeActivity.class);
                                             getActivity().finish();
                                             startActivity(intent);
                                             Toast.makeText(myView.getContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
@@ -132,11 +133,10 @@ public class SignupTwoTeacherFragment extends Fragment {
                             map.put("password", teacher.getPassword());
                             map.put("address", teacher.getAddress());
                             map.put("phone", teacher.getphoneNumber());
-                            map.put("email_address", teacher.getEmailAddress());
+                            map.put("email", teacher.getEmailAddress());
                             map.put("phone_scope", "public");
                             map.put("email_scope", "public");
                             map.put("gender", teacher.getGender());
-                            Log.d("signupError", map.toString());
                             return map;
                         }
                     };

@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.activities.ChildHomeActivity;
+import com.example.sufyanlatif.myapplication.activities.ParentHomeActivity;
 import com.example.sufyanlatif.myapplication.models.Parent;
 import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.example.sufyanlatif.myapplication.utils.Utility;
@@ -102,7 +103,7 @@ public class SignupTwoParentFragment extends Fragment {
 
                                             progressDialog.dismiss();
 
-                                            Intent intent= new Intent(getActivity().getBaseContext(), ChildHomeActivity.class);
+                                            Intent intent= new Intent(getActivity().getBaseContext(), ParentHomeActivity.class);
                                             getActivity().finish();
                                             startActivity(intent);
                                             Toast.makeText(myView.getContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
@@ -133,7 +134,7 @@ public class SignupTwoParentFragment extends Fragment {
                             map.put("password", parent.getPassword());
                             map.put("address", parent.getAddress());
                             map.put("phone", parent.getphoneNumber());
-                            map.put("email_address", parent.getEmailAddress());
+                            map.put("email", parent.getEmailAddress());
                             map.put("phone_scope", "public");
                             map.put("email_scope", "public");
                             map.put("gender", parent.getGender());

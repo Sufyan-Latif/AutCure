@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -31,6 +32,7 @@ import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.example.sufyanlatif.myapplication.webservices.Communication;
 import com.example.sufyanlatif.myapplication.webservices.Performance;
 import com.example.sufyanlatif.myapplication.webservices.UserRecord;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -40,6 +42,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TeacherHomeActivity extends AppCompatActivity {
@@ -112,8 +115,75 @@ public class TeacherHomeActivity extends AppCompatActivity {
         assignTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TeacherHomeActivity.this, TempActivity.class);
-                startActivity(intent);
+                StringRequest request = new StringRequest(Request.Method.POST, Constants.BASE_URL + "assign_tasks.php", new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("VolleyError", ""+response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String code = jsonObject.getString("code");
+                            if (code.equalsIgnoreCase("success")){
+                                JSONArray jsonArray = jsonObject.getJSONArray("children");
+//                                for (int i=0; i<jsonArray.length(); i++){
+//                                    JSONObject childObject = jsonArray.getJSONObject(i);
+
+
+
+
+                                    HashMap<String, ArrayList<String>> taskMap= new LinkedHashMap<>(jsonArray.length());
+                                    Intent intent = new Intent(TeacherHomeActivity.this, ListNamesActivity.class);
+
+                                    ArrayList<String> ids= new ArrayList<>();
+                                    ArrayList<String> firstNames= new ArrayList<>();
+                                    ArrayList<String> lastNames= new ArrayList<>();
+
+                                    for (int i=0; i<jsonArray.length(); i++){
+                                        JSONObject jo= jsonArray.getJSONObject(i);
+                                        ids.add(jo.getString("id"));
+                                        firstNames.add(jo.getString("first_name"));
+                                        lastNames.add(jo.getString("last_name"));
+//                                        if(i==jsonArray.length()-1){
+//                                            recordMap.put("id", ids);
+//                                            recordMap.put("first_name", firstNames);
+//                                            recordMap.put("last_name", lastNames);
+//                                        }
+                                    }
+                                taskMap.put("id", ids);
+                                taskMap.put("first_name", firstNames);
+                                taskMap.put("last_name", lastNames);
+
+                                    Gson gson = new Gson();
+                                    String json= gson.toJson(taskMap);
+                                    intent.putExtra("callfrom", "TeacherHomeActivity");
+                                    intent.putExtra("map", json);
+                                    startActivity(intent);
+
+//                                }
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e("VolleyError", ""+e);
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("VolleyError", ""+error);
+
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("teacher_id", teacher.getId());
+                        map.put("activity", "TeacherHomeActivity");
+                        return map;
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(TeacherHomeActivity.this);
+                queue.add(request);
             }
         });
         /*

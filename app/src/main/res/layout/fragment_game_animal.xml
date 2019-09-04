@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".fragments.GameAnimalFragment">
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXIT"
+        android:background="#FF0000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/imgNext"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_navigate_next_grey_24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnExit"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvWhereIsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Touch the "
+            android:textColor="#fff"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/tvAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvWhereIsLabel"
+            android:text="CAT"
+            android:textColor="#F8A009"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgAnimalTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/view"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/boy"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        />
+
+    <ImageView
+        android:id="@+id/imgAnimalOne"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_toStartOf="@id/view"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/boy"/>
+
+</RelativeLayout>
