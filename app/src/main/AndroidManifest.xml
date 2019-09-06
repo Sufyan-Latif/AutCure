@@ -16,8 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.TeacherWelcomeActivity"
+            android:label="@string/title_activity_teacher_welcome"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activities.SignupActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activities.TempActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity android:name=".activities.UpdateInfoActivity" /> <!-- <activity android:name=".MainActivity"/> -->
@@ -27,8 +31,9 @@
         <activity android:name=".activities.AuthenticationActivity" />
         <activity android:name=".activities.TeacherHomeActivity" />
         <activity android:name=".activities.ParentHomeActivity" />
-        <activity android:name=".activities.ChildHomeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.ChildHomeActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activities.ChildSignupActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SplashActivity">
@@ -58,9 +63,10 @@
             android:name=".activities.PerformanceActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.TeacherCommunicationActivity" />
-        <activity android:name=".activities.AnimalGameActivity"
+        <activity
+            android:name=".activities.AnimalGameActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activities.VegetableGameActivity" />
     </application>
 

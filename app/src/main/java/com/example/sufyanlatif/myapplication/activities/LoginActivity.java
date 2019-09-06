@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             if (sp.getString("type", "null").equals("teacher")) {
-                Intent intent = new Intent(LoginActivity.this, TeacherHomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, TeacherWelcomeActivity.class);
                 finish();
                 startActivity(intent);
             }

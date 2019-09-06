@@ -57,6 +57,7 @@ public class Communication extends AsyncTask<String, String, String>{
                 URL url = new URL(login_url);
                 try {
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setConnectTimeout(10000);
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
                     httpURLConnection.setDoInput(true);

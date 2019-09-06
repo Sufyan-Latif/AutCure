@@ -6,15 +6,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.sufyanlatif.myapplication.R;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 
 public class TeacherCommunicationActivity extends AppCompatActivity {
 
     Button dialNumber, sendMail;
     TextView tvname, tvaddress;
+    ImageView imgProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,10 @@ public class TeacherCommunicationActivity extends AppCompatActivity {
         sendMail=findViewById(R.id.btnTeacherSendMail);
         tvname= findViewById(R.id.tvname);
         tvaddress= findViewById(R.id.tvaddress);
+        imgProfile= findViewById(R.id.imgProfile);
+
+        String RETRIEVE_URL = Constants.BASE_URL + "images/parent1.jpeg";
+        Glide.with(this).load(RETRIEVE_URL).placeholder(R.drawable.ic_couple).into(imgProfile);
 
         Intent intent= getIntent();
         String name= intent.getStringExtra("first_name")+ " "+ intent.getStringExtra("last_name");

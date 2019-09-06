@@ -1,9 +1,11 @@
 package com.example.sufyanlatif.myapplication.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -106,7 +108,20 @@ public class ListNamesActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     if (Utility.isInternetConnected(ListNamesActivity.this)) {
-                        StringRequest request = new StringRequest(Request.Method.POST,
+
+                        String games[] = {"Put the balls in Basket", "Match the shapes", "Choose the Animal", "Choose the fruit", "Choose the vegetable"};
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ListNamesActivity.this)
+                                .setTitle("Select the game !")
+                                .setItems(games, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(ListNamesActivity.this, "Task Assigned Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        /*StringRequest request = new StringRequest(Request.Method.POST,
                                 Constants.BASE_URL + "assign_tasks.php", new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -130,7 +145,7 @@ public class ListNamesActivity extends AppCompatActivity {
                             }
                         };
                         RequestQueue queue = Volley.newRequestQueue(ListNamesActivity.this);
-                        queue.add(request);
+                        queue.add(request);*/
                     } else
                         Toast.makeText(ListNamesActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 

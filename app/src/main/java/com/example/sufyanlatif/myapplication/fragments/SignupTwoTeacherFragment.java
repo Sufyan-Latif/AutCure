@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.activities.ChildHomeActivity;
 import com.example.sufyanlatif.myapplication.activities.TeacherHomeActivity;
+import com.example.sufyanlatif.myapplication.activities.TeacherWelcomeActivity;
 import com.example.sufyanlatif.myapplication.models.Teacher;
 import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.example.sufyanlatif.myapplication.utils.Utility;
@@ -102,7 +103,7 @@ public class SignupTwoTeacherFragment extends Fragment {
                                         if (object.getString("code").equalsIgnoreCase("success")) {
 
                                             progressDialog.dismiss();
-                                            Intent intent= new Intent(getActivity().getBaseContext(), TeacherHomeActivity.class);
+                                            Intent intent= new Intent(getActivity().getBaseContext(), TeacherWelcomeActivity.class);
                                             getActivity().finish();
                                             startActivity(intent);
                                             Toast.makeText(myView.getContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();

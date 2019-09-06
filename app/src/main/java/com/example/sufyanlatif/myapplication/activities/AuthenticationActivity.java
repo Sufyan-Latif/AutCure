@@ -88,7 +88,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if (sp.getString("type", "null").equals("teacher")) {
-                    Intent intent = new Intent(AuthenticationActivity.this, TeacherHomeActivity.class);
+                    Intent intent = new Intent(AuthenticationActivity.this, TeacherWelcomeActivity.class);
                     finish();
                     startActivity(intent);
                 }
@@ -286,7 +286,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 //                    editor.putString("type", "teacher");
 //                    editor.apply();
 
-                    Intent intent = new Intent(context, TeacherHomeActivity.class);
+                    Intent intent = new Intent(context, TeacherWelcomeActivity.class);
                     finish();
                     context.startActivity(intent);
                 } else {
