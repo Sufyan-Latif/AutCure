@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sufyanlatif.myapplication.R;
-import com.example.sufyanlatif.myapplication.activities.AuthenticationActivity;
+import com.example.sufyanlatif.myapplication.activities.MyAuthenticationActivity;
 
 import java.util.regex.Pattern;
 
@@ -79,7 +79,7 @@ public class ChildSignupOneFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getBaseContext(), AuthenticationActivity.class);
+                Intent intent = new Intent(getActivity().getBaseContext(), MyAuthenticationActivity.class);
                 getActivity().finish();
                 startActivity(intent);
             }

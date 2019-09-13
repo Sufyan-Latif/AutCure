@@ -2,6 +2,7 @@ package com.example.sufyanlatif.myapplication.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
@@ -21,11 +22,12 @@ import library.shmehdi.dragger.Dragger;
 
 public class GameMatchShapeActivity extends AppCompatActivity {
 
-    Child child = Child.getInstance();
+//    Child child = Child.getInstance();
     ImageView squareShape, circleShape, rectangleShape;
     TextView tvSquare, tvCircle, tvRectangle, tvCorrectShape, tvIncorrectShape;
     int correctShapeScore = 0, incorrectShapeScore = 0;
     int noOfShapes = 3;
+    SharedPreferences sp;
 
 
     @Override
@@ -41,6 +43,7 @@ public class GameMatchShapeActivity extends AppCompatActivity {
         tvRectangle= findViewById(R.id.tvRectangle);
         tvCorrectShape= findViewById(R.id.tvCorrectShape);
         tvIncorrectShape= findViewById(R.id.tvIncorrectShape);
+        sp = getSharedPreferences("myLoginData", 0);
 
         MediaPlayer putTheShapesAtCorrectPosition = MediaPlayer.create(GameMatchShapeActivity.this, R.raw.put_the_shapes_at_correct_position);
         putTheShapesAtCorrectPosition.start();
@@ -172,14 +175,19 @@ public class GameMatchShapeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        UploadScore uploadScore = new UploadScore(GameMatchShapeActivity.this);
-                        uploadScore.execute(
-                                "upload_score",
-                                "Put the Shapes at Correct Position",
-                                child.getUsername(),
-                                Integer.toString(correctShapeScore),
-                                Integer.toString(incorrectShapeScore)
-                        );
+                        if (getIntent().getStringExtra("status").equalsIgnoreCase("registered")){
+
+                            UploadScore uploadScore = new UploadScore(GameMatchShapeActivity.this);
+                            uploadScore.execute(
+                                    "upload_score",
+                                    "Put the Shapes at Correct Position",
+//                                child.getUsername(),
+                                    sp.getString("username", ""),
+                                    Integer.toString(correctShapeScore),
+                                    Integer.toString(incorrectShapeScore)
+                            );
+                        }
+
                         finish();
                     }
                 });

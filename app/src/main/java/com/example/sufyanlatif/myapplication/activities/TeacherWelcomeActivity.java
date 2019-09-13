@@ -1,5 +1,6 @@
 package com.example.sufyanlatif.myapplication.activities;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -26,6 +28,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +42,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.fragments.NavHomeFragment;
 import com.example.sufyanlatif.myapplication.models.Teacher;
@@ -69,7 +73,12 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
     NavigationView navigationView;
     SharedPreferences sp;
     SharedPreferences.Editor editor;
-    Teacher teacher;
+
+    SharedPreferences spUpdateInfo;
+    SharedPreferences.Editor editorUpdateInfo;
+
+    String id;
+//    Teacher teacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,31 +111,30 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
 
         sp = getSharedPreferences("myLoginData", 0);
         editor = sp.edit();
-        editor.putString("type", "teacher");
-        editor.apply();
+        id = sp.getString("id", "");
+
+        spUpdateInfo = getSharedPreferences("updateInfo", 0);
+        editorUpdateInfo = spUpdateInfo.edit();
+
+//        editor.putString("type", "teacher");
+//        editor.apply();
 
         String username = sp.getString("username", "abc");
-        String password = sp.getString("password", "xyz");
+//        String password = sp.getString("password", "xyz");
+        String firstName = sp.getString("first_name", "");
+        String lastName = sp.getString("last_name", "");
 
-        Log.d("TeacherHomeActivity", "username = " + username + " Password = " + password);
+        setNavView(firstName + " " + lastName, username);
 
-        teacher = Teacher.getInstance();
-        if (teacher.getUsername() == null) {
-            if (Utility.isInternetConnected(this)) {
-                UserRecord userRecord = new UserRecord(TeacherWelcomeActivity.this);
-                userRecord.execute("getRecord", "teacher", username, password);
-
-                ImageView imgProfile = navigationView.getHeaderView(0).findViewById(R.id.imgProfile);
-
-                String RETRIEVE_URL = Constants.BASE_URL + "images/teacher1.jpeg";
-//                Picasso.get().load(RETRIEVE_URL).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
-//                        .placeholder(R.drawable.ic_user).into(imgProfile);
-
-                Glide.with(this).load(RETRIEVE_URL).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .placeholder(R.drawable.ic_user).into(imgProfile);
-            } else
-                Toast.makeText(TeacherWelcomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
-        }
+//        teacher = Teacher.getInstance();
+//        if (teacher.getUsername() == null) {
+//            if (Utility.isInternetConnected(this)) {
+//                UserRecord userRecord = new UserRecord(TeacherWelcomeActivity.this);
+//                userRecord.execute("getRecord", "teacher", username, password);
+//
+//            } else
+//                Toast.makeText(TeacherWelcomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+//        }
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -141,20 +149,31 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
 //        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    public void setnavView() {
-        TextView name = navigationView.getHeaderView(0).findViewById(R.id.tvFirstName);
-        TextView username = navigationView.getHeaderView(0).findViewById(R.id.tvUsername);
+    public void setNavView(String name, String username) {
 
-        name.setText(teacher.getFirstName() + " " + teacher.getLastName());
-        username.setText(teacher.getUsername());
+//                Picasso.get().load(RETRIEVE_URL).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+//                        .placeholder(R.drawable.ic_user).into(imgProfile);
+
+        String RETRIEVE_URL = Constants.BASE_URL + "images/teacher"+ id +".jpeg";
+        ImageView imgProfile = navigationView.getHeaderView(0).findViewById(R.id.imgProfile);
+
+        Glide.with(this).load(RETRIEVE_URL).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.ic_user).into(imgProfile);
+
+
+        TextView tvName = navigationView.getHeaderView(0).findViewById(R.id.tvFirstName);
+        TextView tvUsername = navigationView.getHeaderView(0).findViewById(R.id.tvUsername);
+
+        tvName.setText(name);
+        tvUsername.setText(username);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.teacher_welcome, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.teacher_welcome, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -166,6 +185,11 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
                 break;
 
             case R.id.nav_view_performance:
+                Intent intent = new Intent(TeacherWelcomeActivity.this, ChildrenListActivity.class);
+                intent.putExtra("callFrom", "TeacherWelcomeActivity.java");
+                intent.putExtra("action", "ViewPerformance");
+                startActivity(intent);
+                /*
                 if (Utility.isInternetConnected(this)) {
                     if (teacher.getAssociated().equals("yes")) {
                         Performance performance = new Performance(TeacherWelcomeActivity.this);
@@ -176,15 +200,25 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
 //                    RetrievePerformance retrievePerformance= new RetrievePerformance(ParentHomeActivity.this);
 //                    retrievePerformance.execute("retrieve_performance", parent.getUsername());
                 } else
-                    Toast.makeText(TeacherWelcomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeacherWelcomeActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();*/
                 break;
             case R.id.nav_communication:
-
+                intent = new Intent(TeacherWelcomeActivity.this, ChildrenListActivity.class);
+                intent.putExtra("callFrom", "TeacherWelcomeActivity.java");
+                intent.putExtra("action", "Communication");
+                startActivity(intent);
+/*
                 Communication communication = new Communication(TeacherWelcomeActivity.this);
-                communication.execute("TeacherHomeActivity", teacher.getId(), "children");
+                communication.execute("TeacherHomeActivity", teacher.getId(), "children");*/
                 break;
 
             case R.id.nav_assign_tasks:
+
+                intent = new Intent(TeacherWelcomeActivity.this, ChildrenListActivity.class);
+                intent.putExtra("callFrom", "TeacherWelcomeActivity.java");
+                intent.putExtra("action", "AssignTask");
+                startActivity(intent);
+                /*
                 StringRequest request = new StringRequest(Request.Method.POST, Constants.BASE_URL + "assign_tasks.php", new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -244,21 +278,65 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> map = new HashMap<>();
-                        map.put("teacher_id", teacher.getId());
+                        map.put("teacher_id", id);
                         map.put("activity", "TeacherHomeActivity");
                         return map;
                     }
                 };
                 RequestQueue queue = Volley.newRequestQueue(TeacherWelcomeActivity.this);
-                queue.add(request);
+                queue.add(request);*/
                 break;
             case R.id.nav_update_profile:
-                Intent intent = new Intent(TeacherWelcomeActivity.this, UpdateInfoActivity.class);
+                editorUpdateInfo.putString("type", "teacher");
+                editorUpdateInfo.putString("id", sp.getString("id", ""));
+                editorUpdateInfo.putString("first_name", sp.getString("first_name", ""));
+                editorUpdateInfo.putString("last_name", sp.getString("last_name", ""));
+                editorUpdateInfo.putString("username", sp.getString("username", ""));
+                editorUpdateInfo.putString("password", sp.getString("password", ""));
+                editorUpdateInfo.putString("address", sp.getString("address", ""));
+                editorUpdateInfo.putString("phone", sp.getString("phone", ""));
+                editorUpdateInfo.putString("email", sp.getString("email", ""));
+                editorUpdateInfo.apply();
+                intent = new Intent(TeacherWelcomeActivity.this, UpdateInfoActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.nav_associate_children:
+                intent = new Intent(TeacherWelcomeActivity.this, ChildrenListActivity.class);
+                intent.putExtra("callFrom", "TeacherWelcomeActivity.java");
+                intent.putExtra("action", "AssociateChildren");
                 startActivity(intent);
                 break;
 
             case R.id.nav_logout:
-                AlertDialog.Builder builder = new AlertDialog.Builder(TeacherWelcomeActivity.this);
+                final Dialog dialog = new Dialog(TeacherWelcomeActivity.this);
+                View dialogView = LayoutInflater.from(this).inflate(R.layout.logout_dialog, null);
+
+                Button btnYes = dialogView.findViewById(R.id.btnYes);
+                Button btnNo = dialogView.findViewById(R.id.btnNo);
+
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        sp = getSharedPreferences("myLoginData", 0);
+//                        editor = sp.edit();
+                        editor.remove("type");
+                        editor.apply();
+                        Intent intent = new Intent(TeacherWelcomeActivity.this, MyAuthenticationActivity.class);
+                        finish();
+                        startActivity(intent);
+                    }
+                });
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.setContentView(dialogView);
+                dialog.show();
+            /*    AlertDialog.Builder builder = new AlertDialog.Builder(TeacherWelcomeActivity.this);
                 builder.setTitle("Alert!!!")
                         .setMessage("Are you sure you want to logout?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -275,7 +353,7 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
                             }
                         })
                         .setNegativeButton("No", null)
-                        .show();
+                        .show();*/
                 break;
 
         }
@@ -290,11 +368,4 @@ public class TeacherWelcomeActivity extends AppCompatActivity implements Navigat
         else
             super.onBackPressed();
     }
-
-    //    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
 }

@@ -324,7 +324,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
                             editor.remove("type");
                             editor.apply();
                             teacher.remove();
-                            Intent intent = new Intent(TeacherHomeActivity.this, AuthenticationActivity.class);
+                            Intent intent = new Intent(TeacherHomeActivity.this, MyAuthenticationActivity.class);
                             finish();
                             startActivity(intent);
                         }

@@ -1,8 +1,12 @@
 package com.example.sufyanlatif.myapplication.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
@@ -12,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,10 +50,13 @@ public class SignupTwoChildFragment extends Fragment {
 
     View myView;
     Child child = Child.getInstance();
-    TextInputEditText etLevel, etAddress, etDOB;
+    TextInputEditText etLevel, etAddress;
     RadioGroup rgGender;
     Button btnNext, btnBack;
     String gender = "";
+    TextView tvDOB;
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     public SignupTwoChildFragment() {
         // Required empty public constructor
@@ -59,6 +69,14 @@ public class SignupTwoChildFragment extends Fragment {
         myView =  inflater.inflate(R.layout.fragment_signup_two_child, container, false);
         bindViews();
 
+        tvDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                showCalender();
+                Utility.showDialog(myView.getContext(), tvDOB);
+            }
+        });
+
         rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -69,22 +87,39 @@ public class SignupTwoChildFragment extends Fragment {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (Utility.isEmpty(etLevel, "Enter Level") ||
-                        Utility.isEmpty(etAddress, "Enter Address") ||
-                        Utility.isEmpty(etDOB, "Enter Date of Birth")){
+                        Utility.isEmpty(etAddress, "Enter Address")){
 
-                } if (gender.equals("")){
+                } if (gender.equals("") || tvDOB.getText().toString().equalsIgnoreCase("DD/MM/YYYY")){
+                    Toast.makeText(myView.getContext(), "Please Enter Data", Toast.LENGTH_SHORT).show();
 
                 } else {
 
                     child.setLevel(etLevel.getText().toString());
                     child.setAddress(etAddress.getText().toString());
-                    child.setDateOfBirth(etDOB.getText().toString());
+                    child.setDateOfBirth(tvDOB.getText().toString());
                     child.setGender(gender);
+
+                    editor.putString("type", "child");
+                    editor.putString("id", child.getId());
+                    editor.putString("first_name", child.getFirstName());
+                    editor.putString("last_name", child.getLastName());
+                    editor.putString("address", child.getAddress());
+                    editor.putString("gender", child.getGender());
+                    editor.putString("username", child.getUsername());
+                    editor.putString("password", child.getPassword());
+                    editor.apply();
 
                     final ProgressDialog progressDialog = new ProgressDialog(view.getContext());
                     progressDialog.setMessage("Loading...");
@@ -150,9 +185,29 @@ public class SignupTwoChildFragment extends Fragment {
     private void bindViews() {
         etLevel = myView.findViewById(R.id.etLevel);
         etAddress = myView.findViewById(R.id.etAddress);
-        etDOB = myView.findViewById(R.id.etDOB);
         rgGender = myView.findViewById(R.id.rgGender);
         btnNext = myView.findViewById(R.id.btnNext);
         btnBack = myView.findViewById(R.id.btnBack);
+        tvDOB = myView.findViewById(R.id.tvDOB);
+
+        sp = getActivity().getSharedPreferences("myLoginData", 0);
+        editor = sp.edit();
+    }
+
+    private void showCalender(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(myView.getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                tvDOB.setText(day+"/"+(month+1)+"/"+year);
+            }
+        }, year, month, day);
+
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
     }
 }

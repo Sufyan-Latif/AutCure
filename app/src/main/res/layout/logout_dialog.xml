@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBlack"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:background="@color/colorDialogBackground"
     android:padding="@dimen/padding_main_alert_dialog"
     >
 
@@ -12,29 +14,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/title_alert_dialog"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Alert"
-        android:textStyle="italic"
+        android:textColor="@color/colorDialogText"
+        android:text="@string/alert"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:gravity="center"
         />
 
     <TextView
-        android:id="@+id/tvLogoutLabel"
+        android:id="@+id/tvAlertSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/do_you_want_to_logout"
         android:textSize="@dimen/subtitle_alert_dialog"
         android:layout_below="@id/tvAlertLabel"
-        android:textColor="@color/colorWhite"
-        android:layout_marginTop="30dp"
+        android:textColor="@color/colorDialogText"
+        android:layout_marginTop="25dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/tvLogoutLabel"
+        android:layout_below="@id/tvAlertSubtitle"
         android:layout_marginBottom="10dp"
         android:weightSum="2">
 
@@ -45,9 +47,10 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:text="@string/yes"
-            android:background="#FF9800"
+            android:background="#B93A913E"
             android:textSize="@dimen/btn_text_alert_dialog"
             android:padding="5dp"
+            android:textColor="@color/colorDialogButtonText"
             android:textStyle="bold"/>
 
         <Button
@@ -57,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/no"
-            android:background="#FF9800"
+            android:background="@color/colorDialogButtonRed"
+            android:textColor="@color/colorDialogButtonText"
             android:padding="5dp"
             android:textSize="@dimen/btn_text_alert_dialog"
             android:textStyle="bold"/>

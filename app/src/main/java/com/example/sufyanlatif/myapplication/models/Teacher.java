@@ -1,6 +1,8 @@
 package com.example.sufyanlatif.myapplication.models;
 
-public class Teacher {
+import java.io.Serializable;
+
+public class Teacher implements Serializable {
     private static Teacher instance = null;
 
     String id;
@@ -21,7 +23,7 @@ public class Teacher {
         this.username = null;
         this.password = null;
     }
-    private Teacher() {
+    public Teacher() {
     }
 
     public String getId() {

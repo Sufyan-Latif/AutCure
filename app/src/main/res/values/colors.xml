@@ -5,4 +5,9 @@
     <color name="colorAccent">#247ce7</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorDialogButtonRed">#CDFA5C51</color>
+    <color name="colorDialogButtonText">#EBEBEB</color>
+    <color name="colorDialogBackground">#9CF7F7F7</color>
+    <color name="colorDialogText">#555555</color>
+
 </resources>

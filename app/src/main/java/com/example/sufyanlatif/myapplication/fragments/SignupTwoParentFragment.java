@@ -3,10 +3,12 @@ package com.example.sufyanlatif.myapplication.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +47,12 @@ public class SignupTwoParentFragment extends Fragment {
     RadioGroup rgGender;
     Button btnNext, btnBack;
     String gender = "";
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     public SignupTwoParentFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +72,13 @@ public class SignupTwoParentFragment extends Fragment {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,15 +86,35 @@ public class SignupTwoParentFragment extends Fragment {
                 if (Utility.isEmpty(etPhoneNumber, "Enter Phone Number") ||
                         Utility.isEmpty(etEmailAddress, "Enter Email Address") ||
                         Utility.isEmpty(etAddress, "Enter Address")){
-
-                } if (gender.equals("")){
-
+                    return;
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(etEmailAddress.getText().toString().trim()).matches())
+                {
+                    etEmailAddress.requestFocus();
+                    etEmailAddress.setError("Please Enter a valid email address");
+                    return;
+                }
+                if (gender.equals("")){
+                    Toast.makeText(myView.getContext(), "Choose Gender", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
 
                     parent.setPhoneNumber(etPhoneNumber.getText().toString());
                     parent.setAddress(etAddress.getText().toString());
                     parent.setEmailAddress(etEmailAddress.getText().toString());
                     parent.setGender(gender);
+
+                    editor.putString("type", "parent");
+                    editor.putString("id", parent.getId());
+                    editor.putString("first_name", parent.getFirstName());
+                    editor.putString("last_name", parent.getLastName());
+                    editor.putString("address", parent.getAddress());
+                    editor.putString("gender", parent.getGender());
+                    editor.putString("username", parent.getUsername());
+                    editor.putString("password", parent.getPassword());
+                    editor.putString("phone", parent.getphoneNumber());
+                    editor.putString("email", parent.getEmailAddress());
+                    editor.apply();
 
                     final ProgressDialog progressDialog = new ProgressDialog(view.getContext());
                     progressDialog.setMessage("Loading...");
@@ -156,5 +186,8 @@ public class SignupTwoParentFragment extends Fragment {
         rgGender = myView.findViewById(R.id.rgGender);
         btnNext = myView.findViewById(R.id.btnNext);
         btnBack = myView.findViewById(R.id.btnBack);
+
+        sp = getActivity().getSharedPreferences("myLoginData", 0);
+        editor = sp.edit();
     }
 }

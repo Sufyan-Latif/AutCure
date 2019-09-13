@@ -1,6 +1,8 @@
 package com.example.sufyanlatif.myapplication.models;
 
-public class Parent {
+import java.io.Serializable;
+
+public class Parent implements Serializable {
     private static Parent instance = null;
 
     String id;
@@ -23,7 +25,7 @@ public class Parent {
         this.password = null;
     }
 
-    private Parent() {
+    public Parent() {
     }
 
     public String getId() {

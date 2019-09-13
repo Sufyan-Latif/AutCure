@@ -32,7 +32,6 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/tvSignupLabel"
-            android:contentDescription="@string/parents_image"
             android:src="@drawable/ic_couple" />
 
     </RelativeLayout>
@@ -88,33 +87,58 @@
                         android:drawableStart="@drawable/ic_address"
                         android:drawablePadding="30dp"
                         android:hint="@string/address"
-                        android:inputType="textCapWords"
+                        android:inputType="textPostalAddress"
                         android:paddingStart="20dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/colorBlack"
                         android:textSize="23sp" />
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="#6F000000"
-                    app:errorEnabled="true">
+                    android:layout_marginTop="10dp"
+                    >
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etDOB"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:background="@drawable/buttondesign"
-                        android:drawableStart="@drawable/ic_user"
-                        android:drawablePadding="30dp"
-                        android:hint="@string/date_of_birth"
-                        android:inputType="textEmailAddress"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="10dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_of_birth"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
                         android:textColor="@color/colorBlack"
-                        android:textSize="23sp" />
-                </android.support.design.widget.TextInputLayout>
+                        />
+
+                    <TextView
+                        android:id="@+id/tvDOB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DD/MM/YYYY"
+                        android:textSize="25sp"
+                        android:layout_marginStart="15dp"
+                        />
+                </LinearLayout>
+
+<!--                <android.support.design.widget.TextInputLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColorHint="#6F000000"-->
+<!--                    app:errorEnabled="true">-->
+
+<!--                    <android.support.design.widget.TextInputEditText-->
+<!--                        android:id="@+id/etDOB"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="55dp"-->
+<!--                        android:background="@drawable/buttondesign"-->
+<!--                        android:drawableStart="@drawable/ic_user"-->
+<!--                        android:drawablePadding="30dp"-->
+<!--                        android:hint="@string/date_of_birth"-->
+<!--                        android:inputType="textEmailAddress"-->
+<!--                        android:paddingStart="20dp"-->
+<!--                        android:paddingEnd="10dp"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="23sp" />-->
+<!--                </android.support.design.widget.TextInputLayout>-->
 
                 <TextView
                     android:layout_width="match_parent"

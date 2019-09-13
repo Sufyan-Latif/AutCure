@@ -1,11 +1,14 @@
 package com.example.sufyanlatif.myapplication.activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -23,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,10 +37,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.adapters.UpdateInfoAdapter;
+import com.example.sufyanlatif.myapplication.interfaces.OnUpdateInfoClick;
 import com.example.sufyanlatif.myapplication.models.Parent;
 import com.example.sufyanlatif.myapplication.models.Teacher;
+import com.example.sufyanlatif.myapplication.utils.Constants;
 import com.soundcloud.android.crop.Crop;
 
 import org.json.JSONException;
@@ -58,14 +70,23 @@ public class UpdateInfoActivity extends AppCompatActivity {
     ImageView imgEditPhoto;
     String id;
     String URL = "https://autcureapp1.000webhostapp.com/upload_image.php";
-//    ListView listViewUpdateInfo;
+    String[] titles;
+
+    //    ListView listViewUpdateInfo;
     RecyclerView updateInfoRecyclerView;
-//    Button cropImage;
+    //    Button cropImage;
 //    ImageView resultView;
     EditText etAlertDialog;
     Teacher teacher = Teacher.getInstance();
     Parent parent = Parent.getInstance();
     String[] subtitles;
+    int[] icons;
+    SharedPreferences spUpdateInfo;
+    SharedPreferences.Editor editorUpdateInfo;
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
+    Button btnSave;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +95,141 @@ public class UpdateInfoActivity extends AppCompatActivity {
 
         bindViews();
 
-        String[] titles = {"First Name", "Last Name","Username", "Password", "Address"};
-        if (parent.getUsername() != null){
-            subtitles = new String[]{parent.getFirstName(), parent.getLastName(),
-                    parent.getUsername(), "******", parent.getAddress()};
+        String id = spUpdateInfo.getString("id", "");
+        String RETRIEVE_URL = "";
+        if (spUpdateInfo.getString("type", "null").equals("teacher"))
+            RETRIEVE_URL = Constants.BASE_URL + "images/teacher" + id + ".jpeg";
+        else if (spUpdateInfo.getString("type", "null").equals("parent"))
+            RETRIEVE_URL = Constants.BASE_URL + "images/parent" + id + ".jpeg";
+        else if (spUpdateInfo.getString("type", "null").equals("child"))
+            RETRIEVE_URL = Constants.BASE_URL + "images/child" + id + ".jpeg";
+
+
+        Glide.with(this).load(RETRIEVE_URL).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                Toast.makeText(UpdateInfoActivity.this, "Error Loading image", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                return false;
+            }
+        }).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.ic_user).into(profileImage);
+
+//        if (parent.getUsername() != null){
+        if (spUpdateInfo.getString("type", "null").equals("child")) {
+            titles = new String[]{"First Name", "Last Name", "Username", "Password", "Address"};
+            subtitles = new String[]{spUpdateInfo.getString("first_name", ""), spUpdateInfo.getString("last_name", ""),
+                    spUpdateInfo.getString("username", ""), "******", spUpdateInfo.getString("address", "")};
+            icons = new int[]{R.drawable.ic_user,
+                    R.drawable.ic_user,
+                    R.drawable.ic_user,
+                    R.drawable.ic_lock,
+                    R.drawable.ic_address};
+        } else {
+            titles = new String[]{"First Name", "Last Name", "Username", "Password", "Address", "Phone Number", "Email Address"};
+
+            subtitles = new String[]{spUpdateInfo.getString("first_name", ""), spUpdateInfo.getString("last_name", ""),
+                    spUpdateInfo.getString("username", ""), "******", spUpdateInfo.getString("address", ""),
+                    spUpdateInfo.getString("phone", ""), spUpdateInfo.getString("email", "")};
+            icons = new int[]{R.drawable.ic_user,
+                    R.drawable.ic_user,
+                    R.drawable.ic_user,
+                    R.drawable.ic_lock,
+                    R.drawable.ic_address,
+                    R.drawable.telephonehome,
+                    R.drawable.ic_email_black_24dp};
         }
-        else {
-            subtitles = new String[]{teacher.getFirstName(), teacher.getLastName(),
-                    teacher.getUsername(), "******", teacher.getAddress()};
-        }
-        int[] icons = {R.drawable.ic_user,
-                R.drawable.ic_user,
-                R.drawable.ic_user,
-                R.drawable.ic_lock,
-                R.drawable.ic_address};
-        updateInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        updateInfoRecyclerView.setAdapter(new UpdateInfoAdapter(titles, subtitles, icons));
+
+        updateInfoRecyclerView.setAdapter(new UpdateInfoAdapter(titles, subtitles, icons, new OnUpdateInfoClick() {
+            @Override
+            public void onClick(final int position, String title, String subTitle) {
+
+                final Dialog dialog = new Dialog(UpdateInfoActivity.this);
+                View dialogView = LayoutInflater.from(UpdateInfoActivity.this).inflate(R.layout.update_info_alert_dialog_layout, null);
+
+                TextView tvDialog = dialogView.findViewById(R.id.tvTitleUpdateInfoDialog);
+                final EditText etDialog = dialogView.findViewById(R.id.etUpdateInfoDialog);
+                Button btnDialog = dialogView.findViewById(R.id.btnOkUpdateInfoDialog);
+
+                tvDialog.setText(title);
+                etDialog.setText(subTitle);
+                btnDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String data = etDialog.getText().toString().trim();
+                        boolean dataValidated = true;
+                        if (data.length() == 0) {
+                            etDialog.setError("Please enter details");
+                            dataValidated = false;
+                            return;
+                        } else {
+                            dataValidated = true;
+                            etDialog.setError(null);
+                        }
+                        if (position == 2 && etDialog.getText().toString().length() < 5) {
+                            etDialog.setError("Username must be atleast 5 characters long");
+                            dataValidated = false;
+                            return;
+                        } else {
+                            dataValidated = true;
+                            etDialog.setError(null);
+                        }
+                        if (position == 3 && etDialog.getText().toString().length() < 5) {
+                            etDialog.setError("Password must be atleast 5 characters long");
+                            dataValidated = false;
+                            return;
+                        } else {
+                            dataValidated = true;
+                            etDialog.setError(null);
+                        }
+
+                        if (dataValidated) {
+                            subtitles[position] = etDialog.getText().toString();
+                            dialog.dismiss();
+
+                            switch (position) {
+                                case 0:
+                                    editorUpdateInfo.putString("first_name", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                                case 1:
+                                    editorUpdateInfo.putString("last_name", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                                case 2:
+                                    editorUpdateInfo.putString("username", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                                case 3:
+                                    editorUpdateInfo.putString("password", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                                case 4:
+                                    editorUpdateInfo.putString("address", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                                case 5:
+                                    editorUpdateInfo.putString("phone", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                                case 6:
+                                    editorUpdateInfo.putString("email", subtitles[position]);
+                                    editorUpdateInfo.apply();
+                                    break;
+                            }
+                            recreate();
+                        }
+                    }
+                });
+
+                dialog.setContentView(dialogView);
+                dialog.show();
+            }
+        }));
 
 /*
         updateInfoRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
@@ -128,15 +268,11 @@ public class UpdateInfoActivity extends AppCompatActivity {
 //            }
 //        });
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-        String RETRIEVE_URL;
-        if (teacher.getId() != null)
-            RETRIEVE_URL = "https://autcureapp1.000webhostapp.com/images/teacher1.jpeg";
-        else
-            RETRIEVE_URL = "https://autcureapp1.000webhostapp.com/images/parent1.jpeg";
-        ImageRequest imageRequest = new ImageRequest(RETRIEVE_URL,
+//        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.show();
+
+    /*    ImageRequest imageRequest = new ImageRequest(RETRIEVE_URL,
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap response) {
@@ -153,7 +289,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(imageRequest);
+        requestQueue.add(imageRequest);*/
 
         imgEditPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +304,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
 //                Intent i = new Intent(Intent.ACTION_PICK);
 //                i.setType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(Intent.createChooser(i, "Select Image"), 1);
 
 //                Intent intent = new Intent();
@@ -180,29 +316,112 @@ public class UpdateInfoActivity extends AppCompatActivity {
             }
         });
 
-        etAlertDialog = findViewById(R.id.et_update);
-        etAlertDialog.setOnClickListener(new View.OnClickListener() {
+//        etAlertDialog = findViewById(R.id.et_update);
+//        etAlertDialog.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                displayDialog("", )
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(UpdateInfoActivity.this);
+//                LayoutInflater inflater = getLayoutInflater();
+//
+//                builder.setView(inflater.inflate(R.layout.update_info_alert_dialog_layout, null))
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Toast.makeText(UpdateInfoActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            }
+//                        });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//            }
+//        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-//                displayDialog("", )
-                final AlertDialog.Builder builder = new AlertDialog.Builder(UpdateInfoActivity.this);
-                LayoutInflater inflater = getLayoutInflater();
+                progressDialog.show();
+                final boolean usernameUpdated;
+                final String firstName = spUpdateInfo.getString("first_name", "");
+                final String lastName = spUpdateInfo.getString("last_name", "");
+                final String address = spUpdateInfo.getString("address", "");
+                final String username = spUpdateInfo.getString("username", "");
+                final String password = spUpdateInfo.getString("password", "");
 
-                builder.setView(inflater.inflate(R.layout.update_info_alert_dialog_layout, null))
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(UpdateInfoActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                if (sp.getString("username", "").equals(username))
+                    usernameUpdated = false;
+                else
+                    usernameUpdated = true;
 
+                String URL = Constants.BASE_URL + "update_profile.php";
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                progressDialog.dismiss();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    String code = jsonObject.getString("code");
+                                    if (code.equalsIgnoreCase("success")) {
+                                        Toast.makeText(UpdateInfoActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                                        editor.putString("first_name", spUpdateInfo.getString("first_name", ""));
+                                        editor.putString("last_name", spUpdateInfo.getString("last_name", ""));
+                                        editor.putString("address", spUpdateInfo.getString("address", ""));
+                                        editor.putString("username", spUpdateInfo.getString("username", ""));
+                                        editor.putString("password", spUpdateInfo.getString("password", ""));
+                                        if (!spUpdateInfo.getString("type", "").equals("child")) {
+                                            editor.putString("phone", spUpdateInfo.getString("phone", ""));
+                                            editor.putString("email", spUpdateInfo.getString("email", ""));
+                                        }
+                                        editor.apply();
+
+                                    } else {
+                                        Toast.makeText(UpdateInfoActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                    Toast.makeText(UpdateInfoActivity.this, "Try Again!" + e.toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Toast.makeText(UpdateInfoActivity.this, "Try Again!" + error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+
+                        map.put("model", spUpdateInfo.getString("type", ""));
+                        map.put("id", spUpdateInfo.getString("id", ""));
+                        map.put("username_updated", "" + usernameUpdated);
+                        map.put("first_name", firstName);
+                        map.put("last_name", lastName);
+                        map.put("username", username);
+                        map.put("password", password);
+                        map.put("address", address);
+
+                        if (!spUpdateInfo.getString("type", "").equals("child")) {
+                            map.put("phone", sp.getString("phone", ""));
+                            map.put("email", sp.getString("email", ""));
+                        }
+                        return map;
+                    }
+                };
+                Volley.newRequestQueue(UpdateInfoActivity.this).add(stringRequest);
             }
         });
     }
@@ -211,8 +430,19 @@ public class UpdateInfoActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.profile_image);
         imgEditPhoto = findViewById(R.id.img_edit_photo);
         editPhoto = findViewById(R.id.btn_edit_photo);
+        btnSave = findViewById(R.id.btnSave);
 //        listViewUpdateInfo = findViewById(R.id.listview_update_info);
         updateInfoRecyclerView = findViewById(R.id.update_info_recycler_view);
+        updateInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        spUpdateInfo = getSharedPreferences("updateInfo", 0);
+        editorUpdateInfo = spUpdateInfo.edit();
+
+        sp = getSharedPreferences("myLoginData", 0);
+        editor = sp.edit();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
     }
 
     @Override
@@ -227,7 +457,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
 //
 //        }
 
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
@@ -239,17 +469,18 @@ public class UpdateInfoActivity extends AppCompatActivity {
             }
 
 //            Teacher teacher = Teacher.getInstance();
-            if (teacher.getId() != null)
-                id = teacher.getId();
-            else
-                id = parent.getId();
+//            if (spUpdateInfo.getString("type", "").equalsIgnoreCase("teacher"))
+//                id = spUpdateInfo.getString("id");
+//            else
+//                id = parent.getId();
 
+            id = spUpdateInfo.getString("id", "");
             uploadPicture(id, getStringImage(bitmap));
         }
 
-        if (requestCode == 2 && resultCode == RESULT_OK  && data != null) {
+        if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
 
@@ -260,7 +491,7 @@ public class UpdateInfoActivity extends AppCompatActivity {
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 
-            if(columnIndex < 0) // no column index
+            if (columnIndex < 0) // no column index
                 return; // DO YOUR ERROR HANDLING
 
             String picturePath = cursor.getString(columnIndex);
@@ -279,11 +510,10 @@ public class UpdateInfoActivity extends AppCompatActivity {
     }
 
     private void handleCrop(int resultCode, Intent data) {
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
 //            resultView.setImageURI(Crop.getOutput(data));
-        }
-        else if (resultCode == Crop.RESULT_ERROR){
-            Toast.makeText(this, "Error : "+Crop.getError(data).getMessage(), Toast.LENGTH_SHORT).show();
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, "Error : " + Crop.getError(data).getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -322,30 +552,31 @@ public class UpdateInfoActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressDialog.dismiss();
-                            Toast.makeText(UpdateInfoActivity.this, "Try Again!"+e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateInfoActivity.this, "Try Again!" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(UpdateInfoActivity.this, "Try Again!"+error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(UpdateInfoActivity.this, "Try Again!" + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                if (teacher.getId() != null)
-                    params.put("id", "teacher"+id);
+                if (spUpdateInfo.getString("type", "").equalsIgnoreCase("teacher"))
+                    params.put("id", "teacher" + id);
+                else if (spUpdateInfo.getString("type", "").equalsIgnoreCase("parent"))
+                    params.put("id", "parent" + id);
                 else
-                    params.put("id", "parent"+id);
+                    params.put("id", "child" + id);
                 params.put("photo", photo);
                 return params;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-
     }
 }

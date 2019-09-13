@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,7 +56,8 @@ public class GameAnimalFragment extends Fragment {
     Random random;
     private int SPLASH_DELAY= 1500;
     private Handler mDelayHandler= null;
-    Child child = Child.getInstance();
+    SharedPreferences sp;
+//    Child child = Child.getInstance();
 
     public GameAnimalFragment() {
         // Required empty public constructor
@@ -204,7 +206,8 @@ public class GameAnimalFragment extends Fragment {
                                     protected Map<String, String> getParams() throws AuthFailureError {
                                         Map<String, String> map = new HashMap<>();
                                         map.put("game_name", game);
-                                        map.put("username", child.getUsername());
+//                                        map.put("username", child.getUsername());
+                                        map.put("username", sp.getString("username", ""));
                                         map.put("correct", ""+correct);
                                         map.put("incorrect", ""+inCorrect);
                                         return map;
@@ -276,5 +279,7 @@ public class GameAnimalFragment extends Fragment {
         vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         random = new Random();
         images = new ImageView[]{imgOne, imgTwo};
+
+        sp = getActivity().getSharedPreferences("myLoginData", 0);
     }
 }

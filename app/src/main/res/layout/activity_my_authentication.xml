@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/snackBarLayout"
-    tools:context=".activities.AuthenticationActivity">
+    android:id="@+id/myAuthenticationLayout"
+    tools:context=".activities.MyAuthenticationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/username"
@@ -51,7 +51,7 @@
             android:layout_below="@id/imageView2"
             />
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/password"
@@ -64,19 +64,19 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_below="@id/editText"
+            android:layout_below="@id/etUsername"
             />
 
-
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/cbRememberMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editText1"
+            android:layout_below="@id/etPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="30dp"
             android:text="@string/remember_me"
+            android:visibility="invisible"
             android:textSize="20sp" />
 
 
@@ -88,7 +88,7 @@
             />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnLogin"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
@@ -99,7 +99,7 @@
             android:background="@drawable/button_style"/>
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/btnSignup"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
@@ -109,14 +109,6 @@
             android:textSize="20sp"
             android:textAllCaps="false"
             android:background="@drawable/button_style"/>
-
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            />
 
     </RelativeLayout>
 

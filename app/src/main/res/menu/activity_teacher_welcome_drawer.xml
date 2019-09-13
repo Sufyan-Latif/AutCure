@@ -24,18 +24,13 @@
             android:id="@+id/nav_update_profile"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/update_profile" />
+        <item
+            android:id="@+id/nav_associate_children"
+            android:icon="@drawable/ic_person_add_black_24dp"
+            android:title="@string/associate_children" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_highlight_off_black_24dp"
-                android:title="Logout" />
-        </menu>
-    </item>
 </menu>

@@ -6,40 +6,46 @@
     android:background="#000"
     tools:context=".fragments.GameAnimalFragment">
 
-    <Button
-        android:id="@+id/btnExit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EXIT"
-        android:background="#FF0000"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="#fff"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        />
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
 
-    <ImageView
-        android:id="@+id/imgNext"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_navigate_next_grey_24dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        />
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="EXIT"
+            android:background="#FF0000"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/imgNext"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_navigate_next_grey_24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnExit"
+        android:layout_below="@id/topLayout"
         android:gravity="center">
 
         <TextView
             android:id="@+id/tvWhereIsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="Touch the "
             android:textColor="#fff"
             android:textSize="50sp" />
@@ -48,7 +54,6 @@
             android:id="@+id/tvAnimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tvWhereIsLabel"
             android:text="CAT"
             android:textColor="#F8A009"
             android:textSize="50sp"

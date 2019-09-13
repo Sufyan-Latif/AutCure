@@ -51,7 +51,7 @@ public class PerformanceActivity extends AppCompatActivity {
             int key = entry.getKey();
             Score current = entry.getValue();
 
-            games.add(current.game_id);
+            games.add(current.gameId);
             correct.add(current.correct);
             incorrect.add(current.incorrect);
 //            Log.d("RetrievePerformanceFina", b+ " "+b.id+" "+b.correct+" "+b.incorrect);

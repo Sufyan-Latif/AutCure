@@ -15,10 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.TasksDescriptionActivity"></activity>
+        <activity android:name=".activities.MyAnimationsActivity" />
+        <activity android:name=".activities.AssignTaskActivity" />
+        <activity android:name=".activities.MyAuthenticationActivity" />
+        <activity android:name=".activities.TeachersListActivity" />
+        <activity android:name=".activities.CommunicationDetailedActivity" />
+        <activity android:name=".activities.MyPerformanceActivity" />
+        <activity android:name=".activities.ChildrenListActivity" />
+        <activity
+            android:name=".activities.GamesListActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.TeacherWelcomeActivity"
             android:label="@string/title_activity_teacher_welcome"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SignupActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -28,12 +39,14 @@
         <activity android:name=".activities.AnimationsActivity" />
         <activity android:name=".activities.TeacherSignupActivity" />
         <activity android:name=".activities.ParentSignupActivity" />
-        <activity android:name=".activities.AuthenticationActivity" />
         <activity android:name=".activities.TeacherHomeActivity" />
-        <activity android:name=".activities.ParentHomeActivity" />
+        <activity
+            android:name=".activities.ParentHomeActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".activities.ChildHomeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".activities.ChildSignupActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SplashActivity">
@@ -67,7 +80,6 @@
             android:name=".activities.AnimalGameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activities.VegetableGameActivity" />
     </application>
 
 </manifest>

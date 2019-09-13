@@ -9,15 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sufyanlatif.myapplication.R;
+import com.example.sufyanlatif.myapplication.interfaces.OnUpdateInfoClick;
 
 public class UpdateInfoAdapter extends RecyclerView.Adapter<UpdateInfoAdapter.UpdateInfoViewHolder> {
 
     String[] title, subtitle;
     int[] icons;
-    public UpdateInfoAdapter(String[] title, String[] subtitle, int[] icons) {
+    OnUpdateInfoClick updateInfoClick;
+    public UpdateInfoAdapter(String[] title, String[] subtitle, int[] icons, OnUpdateInfoClick updateInfoClick) {
         this.title= title;
         this.subtitle = subtitle;
         this.icons = icons;
+        this.updateInfoClick = updateInfoClick;
     }
 
     @NonNull
@@ -29,14 +32,21 @@ public class UpdateInfoAdapter extends RecyclerView.Adapter<UpdateInfoAdapter.Up
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UpdateInfoViewHolder holder, int position) {
-        String currTitle = title[position];
-        String currSubtitle = subtitle[position];
+    public void onBindViewHolder(@NonNull UpdateInfoViewHolder holder, final int position) {
+        final String currTitle = title[position];
+        final String currSubtitle = subtitle[position];
         int currIcon= icons[position];
 
         holder.title.setText(currTitle);
         holder.subtitle.setText(currSubtitle);
         holder.icon.setImageResource(currIcon);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateInfoClick.onClick(position, currTitle, currSubtitle);
+            }
+        });
     }
 
     @Override

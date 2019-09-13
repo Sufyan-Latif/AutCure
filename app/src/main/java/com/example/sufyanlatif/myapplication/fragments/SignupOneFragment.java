@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
-import com.example.sufyanlatif.myapplication.activities.AuthenticationActivity;
+import com.example.sufyanlatif.myapplication.activities.MyAuthenticationActivity;
 import com.example.sufyanlatif.myapplication.models.Child;
 import com.example.sufyanlatif.myapplication.models.Parent;
 import com.example.sufyanlatif.myapplication.models.Teacher;
@@ -39,6 +40,7 @@ public class SignupOneFragment extends Fragment {
 
     View view;
     TextInputEditText etFirstName, etLastName, etUsername, etPassword, etConPassword;
+    ImageView imgModel;
     Button btnNext, btnBack;
 
     @Override
@@ -48,6 +50,18 @@ public class SignupOneFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_signup_one, container, false);
 
         bindViews();
+
+        switch (Constants.currModel){
+            case "child":
+                imgModel.setImageDrawable(getResources().getDrawable(R.drawable.boy));
+                break;
+            case "teacher":
+                imgModel.setImageDrawable(getResources().getDrawable(R.drawable.ic_presentation));
+                break;
+            case "parent":
+                imgModel.setImageDrawable(getResources().getDrawable(R.drawable.ic_couple));
+                break;
+        }
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +76,12 @@ public class SignupOneFragment extends Fragment {
 //                    }
                 } else if (!Utility.validateConPass(etConPassword, etPassword)) {
                     Toast.makeText(view.getContext(), "Password Mismatch", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if (etUsername.getText().toString().length()<5){
+                    etUsername.setError("Username must be atleast 5 characters long");
+                }else if (etPassword.getText().toString().length()<5){
+                    etUsername.setError("Username must be atleast 5 characters long");
+                }
+                else {
 
                     switch (Constants.currModel) {
                         case "child":
@@ -110,7 +129,7 @@ public class SignupOneFragment extends Fragment {
                                             if (Constants.currModel.equals("parent"))
                                                 fragmentTransaction.replace(R.id.fragmentContainer, new SignupTwoParentFragment());
                                             progressDialog.dismiss();
-
+                                            fragmentTransaction.addToBackStack(null);
                                             fragmentTransaction.commit();
                                             Toast.makeText(view.getContext(), "Validated", Toast.LENGTH_SHORT).show();
                                         } else if (object.getString("code").equalsIgnoreCase("failure")) {
@@ -143,7 +162,7 @@ public class SignupOneFragment extends Fragment {
         });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
-            Intent intent = new Intent(getActivity(), AuthenticationActivity.class);
+            Intent intent = new Intent(getActivity(), MyAuthenticationActivity.class);
 
             @Override
             public void onClick(View view) {
@@ -179,10 +198,10 @@ public class SignupOneFragment extends Fragment {
             }
         });
         return view;
-
     }
 
     private void bindViews() {
+        imgModel = view.findViewById(R.id.imgModel);
         etFirstName = view.findViewById(R.id.etFirstName);
         etLastName = view.findViewById(R.id.etLastName);
         etUsername = view.findViewById(R.id.etUsername);

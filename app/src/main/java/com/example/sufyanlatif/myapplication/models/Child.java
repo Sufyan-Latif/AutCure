@@ -22,7 +22,7 @@ public class Child {
         this.password = null;
     }
 
-    private Child() {
+    public Child() {
     }
 
     public String getId() {

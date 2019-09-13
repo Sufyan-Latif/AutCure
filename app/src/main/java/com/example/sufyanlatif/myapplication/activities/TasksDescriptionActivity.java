@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.sufyanlatif.myapplication.R;
 
-public class VegetableGameActivity extends AppCompatActivity {
+public class TasksDescriptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vegetable_game);
+        setContentView(R.layout.activity_tasks_description);
     }
 }

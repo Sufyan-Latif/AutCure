@@ -89,7 +89,7 @@ public class UploadScore extends AsyncTask <String, String, String > {
 
     @Override
     protected void onPostExecute(String s) {
-//        Toast.makeText(context, "System Response : " + s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "System Response : " + s,Toast.LENGTH_SHORT).show();
 //        myProgressDialog.dismiss();
 
 //        context.finish();
