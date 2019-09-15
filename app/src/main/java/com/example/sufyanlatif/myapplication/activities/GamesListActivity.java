@@ -14,12 +14,14 @@ public class GamesListActivity extends AppCompatActivity {
 
     CardView cvPutBalls, cvPutShapes, cvChooseAnimal, cvChooseFruit, cvVegetable;
     ImageView imgBack;
+    public static String status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games_list);
 
-        final String status = getIntent().getStringExtra("status");
+        if (getIntent() != null)
+            status = getIntent().getStringExtra("status");
 
         bindViews();
         cvPutBalls.setOnClickListener(new View.OnClickListener() {

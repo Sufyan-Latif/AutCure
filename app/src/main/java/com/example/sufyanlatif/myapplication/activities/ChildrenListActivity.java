@@ -36,10 +36,8 @@ public class ChildrenListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     String callFrom, action;
     ArrayList<Child> childArrayList;
-
     SharedPreferences sp;
     ProgressDialog progressDialog;
-//    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,6 @@ public class ChildrenListActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         sp = getSharedPreferences("myLoginData", 0);
-//        editor = sp.edit();
 
         callFrom = getIntent().getStringExtra("callFrom");
         action = getIntent().getStringExtra("action");

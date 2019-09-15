@@ -29,29 +29,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
-import com.example.sufyanlatif.myapplication.models.Child;
 import com.example.sufyanlatif.myapplication.utils.Constants;
-import com.example.sufyanlatif.myapplication.webservices.UploadScore;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-
 import library.shmehdi.dragger.Dragger;
-
 public class GameDragActivity extends AppCompatActivity {
 
-//    Child child = Child.getInstance();
     ImageView redBall, blueBall, greenBall, blueBasket, redBasket, greenBasket;
     TextView tvCorrectBalls, tvIncorrectBalls;
     int correctBall = 0, incorrectBall = 0;
@@ -421,20 +404,20 @@ public class GameDragActivity extends AppCompatActivity {
 //    }
 
     private void uploadScore(final int correctBall, final int incorrectBall){
-        progressDialog.show();
+//        progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, Constants.BASE_URL + "upload_score.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dialog.dismiss();
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
                         finish();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 dialog.dismiss();
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 Log.e("responseError", ""+error);
                 Toast.makeText(GameDragActivity.this, "Error"+error, Toast.LENGTH_SHORT).show();
             }

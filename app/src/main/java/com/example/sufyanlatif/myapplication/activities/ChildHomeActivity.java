@@ -1,22 +1,16 @@
 package com.example.sufyanlatif.myapplication.activities;
 
 import android.app.Dialog;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,17 +31,11 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Child;
-import com.example.sufyanlatif.myapplication.models.Teacher;
 import com.example.sufyanlatif.myapplication.utils.Constants;
-import com.example.sufyanlatif.myapplication.utils.Utility;
-import com.example.sufyanlatif.myapplication.webservices.UserRecord;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +52,7 @@ public class ChildHomeActivity extends AppCompatActivity {
     TextView tvName;
     Child child;
     Button viewAnimations, playGames, viewTasks, btnUpdateProfile;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +79,6 @@ public class ChildHomeActivity extends AppCompatActivity {
         }).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.ic_user).into(imgProfile);
 
-        viewTasks = findViewById(R.id.btnViewTasks);
         viewTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,12 +95,6 @@ public class ChildHomeActivity extends AppCompatActivity {
             }
         });
 
-//        sp = getSharedPreferences("myLoginData", 0);
-//        editor = sp.edit();
-//        editor.putString("type", "students");
-//        editor.apply();
-
-        viewAnimations = findViewById(R.id.viewAnimations);
         viewAnimations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,8 +159,6 @@ public class ChildHomeActivity extends AppCompatActivity {
                 btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                    sp = getSharedPreferences("myLoginData", 0);
-//                    editor = sp.edit();
                         dialog.dismiss();
                         editor.remove("type");
                         editor.apply();
@@ -201,14 +181,19 @@ public class ChildHomeActivity extends AppCompatActivity {
     }
 
     private void viewTasks() {
+        progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, Constants.BASE_URL + "my_assign_tasks.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
                     if (code.equalsIgnoreCase("success")){
-                        JSONArray teachersArray = jsonObject.getJSONArray("teachers");
+                        Intent myIntent = new Intent(ChildHomeActivity.this, TasksDescriptionActivity.class);
+                        myIntent.putExtra("response", response);
+                        startActivity(myIntent);
+                    /*    JSONArray teachersArray = jsonObject.getJSONArray("teachers");
                         JSONArray tasksArray = jsonObject.getJSONArray("tasks");
 
                         if (tasksArray.length() > 1){
@@ -256,23 +241,23 @@ public class ChildHomeActivity extends AppCompatActivity {
                             Intent intent = new Intent(ChildHomeActivity.this, TeachersListActivity.class);
                             intent.putExtra("response", response);
                             startActivity(intent);
-/*
-                            ArrayList<Teacher> teacherArrayList = new ArrayList<>();
-                            String[] descriptionsArray = new String[teachersArray.length()-1];
-                            for (int i=0; i<teachersArray.length(); i++){
-                                JSONObject teacherObj = teachersArray.getJSONObject(i);
-                                Teacher teacher = new Teacher();
-                                teacher.setId(teacherObj.getString("id"));
-                                teacher.setFirstName(teacherObj.getString("first_name"));
-                                teacher.setLastName(teacherObj.getString("last_name"));
-                                teacherArrayList.add(teacher);
 
-                                JSONObject task = tasksArray.getJSONObject(i);
-//                                String description = task.getString("description");
-//                                descriptionsArray[i] = description;
-                            }
+//                            ArrayList<Teacher> teacherArrayList = new ArrayList<>();
+//                            String[] descriptionsArray = new String[teachersArray.length()-1];
+//                            for (int i=0; i<teachersArray.length(); i++){
+//                                JSONObject teacherObj = teachersArray.getJSONObject(i);
+//                                Teacher teacher = new Teacher();
+//                                teacher.setId(teacherObj.getString("id"));
+//                                teacher.setFirstName(teacherObj.getString("first_name"));
+//                                teacher.setLastName(teacherObj.getString("last_name"));
+//                                teacherArrayList.add(teacher);
+//
+//                                JSONObject task = tasksArray.getJSONObject(i);
+////                                String description = task.getString("description");
+////                                descriptionsArray[i] = description;
+//                            }
 
-*/
+
                         }else if (teachersArray.length() == 1){
                             JSONObject task = tasksArray.getJSONObject(0);
                             String description = task.getString("description");
@@ -303,7 +288,7 @@ public class ChildHomeActivity extends AppCompatActivity {
                                 intent.putExtra("game", "task");
                                 startActivity(intent);
                             }
-                        }
+                        }*/
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -313,6 +298,7 @@ public class ChildHomeActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Toast.makeText(ChildHomeActivity.this, "Check your internet connection", Toast.LENGTH_SHORT).show();
             }
         }){
@@ -328,6 +314,8 @@ public class ChildHomeActivity extends AppCompatActivity {
 
     private void bindViews() {
         btnUpdateProfile = findViewById(R.id.btnUpdateProfile);
+        viewTasks = findViewById(R.id.btnViewTasks);
+        viewAnimations = findViewById(R.id.viewAnimations);
         imgProfile = findViewById(R.id.profile_image);
         imgLogout = findViewById(R.id.imgLogout);
         tvName = findViewById(R.id.tvName);
@@ -336,6 +324,9 @@ public class ChildHomeActivity extends AppCompatActivity {
         editor = sp.edit();
         spUpdateInfo = getSharedPreferences("updateInfo", 0);
         editorUpdateInfo = spUpdateInfo.edit();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
     }
 
 //    @Override

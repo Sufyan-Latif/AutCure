@@ -33,13 +33,9 @@
         <activity
             android:name=".activities.SignupActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activities.TempActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity android:name=".activities.UpdateInfoActivity" /> <!-- <activity android:name=".MainActivity"/> -->
         <activity android:name=".activities.AnimationsActivity" />
-        <activity android:name=".activities.TeacherSignupActivity" />
-        <activity android:name=".activities.ParentSignupActivity" />
-        <activity android:name=".activities.TeacherHomeActivity" />
         <activity
             android:name=".activities.ParentHomeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -47,7 +43,6 @@
             android:name=".activities.ChildHomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".activities.ChildSignupActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
@@ -70,8 +65,6 @@
         <activity
             android:name=".activities.GameMatchShapeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.ListNamesActivity" />
-        <activity android:name=".PerformanceFinalActivity" />
         <activity
             android:name=".activities.PerformanceActivity"
             android:theme="@style/AppTheme.NoActionBar" />

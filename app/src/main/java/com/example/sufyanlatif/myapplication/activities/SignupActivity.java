@@ -5,11 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.sufyanlatif.myapplication.R;
-import com.example.sufyanlatif.myapplication.fragments.ChildSignupOneFragment;
-import com.example.sufyanlatif.myapplication.fragments.ParentSignupOneFragment;
 import com.example.sufyanlatif.myapplication.fragments.SignupOneFragment;
-import com.example.sufyanlatif.myapplication.fragments.TeacherSignupOneFragment;
-import com.example.sufyanlatif.myapplication.utils.Constants;
 
 public class SignupActivity extends AppCompatActivity {
 

@@ -23,8 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sufyanlatif.myapplication.R;
-import com.example.sufyanlatif.myapplication.activities.ChildHomeActivity;
-import com.example.sufyanlatif.myapplication.activities.TeacherHomeActivity;
 import com.example.sufyanlatif.myapplication.activities.TeacherWelcomeActivity;
 import com.example.sufyanlatif.myapplication.models.Teacher;
 import com.example.sufyanlatif.myapplication.utils.Constants;

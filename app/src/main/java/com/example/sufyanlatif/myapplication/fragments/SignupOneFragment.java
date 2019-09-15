@@ -79,7 +79,7 @@ public class SignupOneFragment extends Fragment {
                 } else if (etUsername.getText().toString().length()<5){
                     etUsername.setError("Username must be atleast 5 characters long");
                 }else if (etPassword.getText().toString().length()<5){
-                    etUsername.setError("Username must be atleast 5 characters long");
+                    etPassword.setError("Password must be atleast 5 characters long");
                 }
                 else {
 

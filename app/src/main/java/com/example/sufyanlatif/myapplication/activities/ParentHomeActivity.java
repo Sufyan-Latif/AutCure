@@ -1,18 +1,12 @@
 package com.example.sufyanlatif.myapplication.activities;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,9 +26,6 @@ import com.bumptech.glide.request.target.Target;
 import com.example.sufyanlatif.myapplication.R;
 import com.example.sufyanlatif.myapplication.models.Parent;
 import com.example.sufyanlatif.myapplication.utils.Constants;
-import com.example.sufyanlatif.myapplication.webservices.Communication;
-import com.example.sufyanlatif.myapplication.webservices.Performance;
-import com.example.sufyanlatif.myapplication.webservices.UserRecord;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

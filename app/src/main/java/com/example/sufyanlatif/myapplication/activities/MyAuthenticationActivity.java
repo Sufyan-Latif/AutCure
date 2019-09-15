@@ -84,6 +84,21 @@ public class MyAuthenticationActivity extends AppCompatActivity {
                 final String username = etUsername.getText().toString().trim();
                 final String password = etPassword.getText().toString().trim();
 
+                if (username.equals("")){
+                    etUsername.requestFocus();
+                    etUsername.setError("Enter Username");
+                    return;
+                }
+                else
+                    etUsername.setError(null);
+                if (password.equals("")){
+                    etPassword.requestFocus();
+                    etPassword.setError("Enter Password");
+                    return;
+                }
+                else
+                    etPassword.setError(null);
+
                 if (Utility.isInternetConnected(MyAuthenticationActivity.this)) {
 
                     progressDialog.show();
