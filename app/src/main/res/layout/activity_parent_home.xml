@@ -24,7 +24,8 @@
         android:layout_height="35dp"
         android:layout_margin="10dp"
         android:src="@drawable/logout"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/logout" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -47,7 +48,7 @@
         android:layout_marginTop="18dp"
         android:visibility="invisible"
         android:src="@drawable/ic_couple"
-        />
+        android:contentDescription="@string/profile_image" />
 
     <TextView
         android:id="@+id/tvName"

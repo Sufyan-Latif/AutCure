@@ -18,12 +18,13 @@
             android:id="@+id/imgBack"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_navigate_previous_grey_24dp"/>
+            android:src="@drawable/ic_navigate_previous_grey_24dp"
+            android:contentDescription="@string/go_back" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Select a game"
+            android:text="@string/select_a_game"
             android:textColor="@color/colorWhite"
             android:textSize="35sp"
             android:gravity="center"
@@ -61,7 +62,7 @@
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
                         android:src="@drawable/game_ball"
-                        />
+                        android:contentDescription="@string/ball_icon" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,6 +71,7 @@
                         android:padding="10dp"
                         android:layout_gravity="center"
                         android:textColor="@color/colorBlack"
+                        android:drawableStart="game"
                         />
                 </LinearLayout>
 
@@ -96,7 +98,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
                         android:src="@drawable/game_shapes"
-                        />
+                        android:contentDescription="@string/shapes_icon" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,11 +133,11 @@
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
                         android:src="@drawable/game_animal"
-                        />
+                        android:contentDescription="@string/animal_icon" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Choose the Animal"
+                        android:text="@string/choose_the_animal"
                         android:textSize="25sp"
                         android:padding="10dp"
                         android:textColor="@color/colorBlack"
@@ -166,11 +168,11 @@
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
                         android:src="@drawable/game_fruits"
-                        />
+                        android:contentDescription="@string/fruit_icon" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Choose the Fruits"
+                        android:text="@string/choose_the_fruit"
                         android:textSize="25sp"
                         android:padding="10dp"
                         android:layout_gravity="center"
@@ -200,11 +202,11 @@
                         android:layout_height="70dp"
                         android:layout_margin="10dp"
                         android:src="@drawable/game_veg"
-                        />
+                        android:contentDescription="@string/vegetable_icon" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Choose the Vegetable"
+                        android:text="@string/choose_the_vegetable"
                         android:textSize="25sp"
                         android:padding="10dp"
                         android:layout_gravity="center"

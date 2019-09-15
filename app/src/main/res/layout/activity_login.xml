@@ -14,7 +14,8 @@
         android:layout_height="200dp"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/logo" />
 
     <Button
         android:id="@+id/btnPlayGames"

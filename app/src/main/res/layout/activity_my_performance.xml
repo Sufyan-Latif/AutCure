@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Filter Results"
+            android:text="@string/filter_results"
             android:textSize="20sp"
             android:textColor="@color/colorBlack"
             android:gravity="center"
@@ -41,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Correct"
+            android:text="@string/correct"
             android:textStyle="bold"
             android:padding="10dp"
             android:textSize="25sp"
@@ -54,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Incorrect"
+            android:text="@string/incorrect"
             android:padding="10dp"
             android:textStyle="bold"
             android:textSize="25sp"

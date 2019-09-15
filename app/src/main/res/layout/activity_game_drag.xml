@@ -47,14 +47,16 @@
         android:layout_below="@id/tvPutTheBall"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/red_ball" />
+        android:src="@drawable/red_ball"
+        android:contentDescription="@string/red_ball" />
 
     <ImageView
         android:id="@+id/blueBall"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/blue_ball" />
+        android:src="@drawable/blue_ball"
+        android:contentDescription="@string/blue_ball" />
 
     <ImageView
         android:id="@+id/greenBall"
@@ -62,7 +64,8 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/green_ball" />
+        android:src="@drawable/green_ball"
+        android:contentDescription="@string/green_ball" />
 
     <ImageView
         android:id="@+id/blueBasket"
@@ -70,7 +73,8 @@
         android:layout_height="100dp"
         android:layout_below="@id/tvPutTheBall"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/basket" />
+        android:src="@drawable/basket"
+        android:contentDescription="@string/blue_basket" />
 
     <ImageView
         android:id="@+id/redBasket"
@@ -78,7 +82,8 @@
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/red_basket" />
+        android:src="@drawable/red_basket"
+        android:contentDescription="@string/red_basket" />
 
     <ImageView
         android:id="@+id/greenBasket"
@@ -86,6 +91,7 @@
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/green_basket" />
+        android:src="@drawable/green_basket"
+        android:contentDescription="@string/green_basket" />
 
 </RelativeLayout>

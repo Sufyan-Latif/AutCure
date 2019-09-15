@@ -51,14 +51,16 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/square_shape" />
+        android:src="@drawable/square_shape"
+        android:contentDescription="@string/square_shape" />
 
     <ImageView
         android:id="@+id/circleShape"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/circle_shape" />
+        android:src="@drawable/circle_shape"
+        android:contentDescription="@string/circle_shape" />
 
     <ImageView
         android:id="@+id/rectangleShape"
@@ -66,7 +68,8 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/square_shape" />
+        android:src="@drawable/square_shape"
+        android:contentDescription="@string/rectangle_shape" />
 
     <TextView
         android:id="@+id/tvRectangle"

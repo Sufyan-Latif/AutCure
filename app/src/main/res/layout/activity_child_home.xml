@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_image"
         android:layout_centerHorizontal="true"
-        android:text="Child"
+        android:text="@string/sufyan_latif"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="35sp" />
 
@@ -80,7 +80,7 @@
                 android:drawableStart="@drawable/ic_game"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="Play games"
+                android:text="@string/play_games"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
             <Button
@@ -94,7 +94,7 @@
                 android:textAllCaps="false"
                 android:drawableStart="@drawable/viewtask"
                 android:background="@drawable/button"
-                android:text="View Tasks"
+                android:text="@string/view_tasks"
                 />
 
             <Button
@@ -108,7 +108,7 @@
                 android:textAllCaps="false"
                 android:drawableStart="@drawable/ic_performtask"
                 android:background="@drawable/button"
-                android:text="View Animations"
+                android:text="@string/view_animations"
                 />
 
             <Button
@@ -127,7 +127,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-
 
 </RelativeLayout>
