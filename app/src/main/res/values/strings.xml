@@ -72,9 +72,7 @@
     <string name="associate_children">Associate Children</string>
     <string name="logout">Logout</string>
     <string name="previous">Previous</string>
-    <string name="next">Next</string>
     <string name="sufyan_latif">Sufyan Latif</string>
-    <string name="play_games">Play games</string>
     <string name="view_tasks">View Tasks</string>
     <string name="view_animations">View Animations</string>
     <string name="green_basket">Green Basket</string>
@@ -99,6 +97,6 @@
     <string name="incorrect">Incorrect</string>
     <string name="profile_image">Profile Image</string>
     <string name="autcure_text">AutCure Text</string>
-    <string name="edit_prifile_image">Edit Prifile Image</string>
+    <string name="edit_prifile_image">Edit Profile Image</string>
     <string name="save">Save</string>
 </resources>

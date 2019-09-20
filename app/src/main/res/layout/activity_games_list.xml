@@ -71,7 +71,6 @@
                         android:padding="10dp"
                         android:layout_gravity="center"
                         android:textColor="@color/colorBlack"
-                        android:drawableStart="game"
                         />
                 </LinearLayout>
 
